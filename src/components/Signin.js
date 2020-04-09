@@ -15,11 +15,19 @@ const Signin = () => {
       >
         Sign in
       </Button>
-      <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth="true">
+      <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>
         <DialogContent>
-          <h1 style={{ textAlign: "center" }}>Sign in</h1>
-          <div s>
-            <h2>Login</h2>
+          <h1
+            style={{
+              textAlign: "center",
+              marginTop: "21px",
+              marginBottom: "20px",
+            }}
+          >
+            Sign in
+          </h1>
+          <div>
+            <h2>Username</h2>
             <TextField variant="filled" fullWidth />
             <h2>Password</h2>
             <TextField variant="filled" fullWidth type="password" />

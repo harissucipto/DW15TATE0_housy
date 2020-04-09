@@ -1,13 +1,13 @@
 import React from "react";
-import { Button } from "@material-ui/core";
 
 import Signin from "./Signin";
+import Signup from "./Signup";
 
 const Auth = () => {
   return (
     <div>
       <Signin />
-      <Button variant="contained">Sign up</Button>
+      <Signup />
     </div>
   );
 };
