@@ -1,8 +1,9 @@
 import React from "react";
-import Home from "./pages/Home";
+
+import DetailProperty from "./pages/DetailProperty";
 
 function App() {
-  return <Home />;
+  return <DetailProperty />;
 }
 
 export default App;

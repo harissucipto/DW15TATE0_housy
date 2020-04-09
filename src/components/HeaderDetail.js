@@ -1,11 +1,10 @@
 import React from "react";
 
 import Logo from "./Logo";
-import SearchLocation from "./SearchLocation";
 import Auth from "./Auth";
 import "./Header.css";
 
-const Header = () => {
+const HeaderDetail = () => {
   return (
     <div className="header">
       <Logo />
@@ -13,16 +12,15 @@ const Header = () => {
         style={{
           display: "flex",
           flex: 1,
-          justifyContent: "space-between",
+          justifyContent: "flex-end",
           flexWrap: "wrap",
           paddingLeft: "50px",
         }}
       >
-        <SearchLocation />
         <Auth />
       </div>
     </div>
   );
 };
 
-export default Header;
+export default HeaderDetail;
