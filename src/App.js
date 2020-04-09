@@ -1,8 +1,8 @@
 import React from "react";
-import MyBooking from "./pages/MyBooking";
+import AddProperty from "./pages/AddProperty";
 
 function App() {
-  return <MyBooking />;
+  return <AddProperty />;
 }
 
 export default App;
