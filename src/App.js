@@ -1,9 +1,8 @@
 import React from "react";
-
-import DetailProperty from "./pages/DetailProperty";
+import Profile from "./pages/Profile";
 
 function App() {
-  return <DetailProperty />;
+  return <Profile />;
 }
 
 export default App;
