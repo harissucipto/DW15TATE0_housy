@@ -1,8 +1,8 @@
 import React from "react";
-import Profile from "./pages/Profile";
+import MyBooking from "./pages/MyBooking";
 
 function App() {
-  return <Profile />;
+  return <MyBooking />;
 }
 
 export default App;
