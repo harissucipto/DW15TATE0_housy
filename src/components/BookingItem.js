@@ -12,8 +12,12 @@ const BookingItem = ({
   date,
   checkIn,
   checkOut,
+  invoiceImage,
   status = "notYet",
+  invoiceNumber,
+  dateInvoice,
 }) => {
+  const isNotApprove = status !== "approved";
   return (
     <Card variant="outlined" style={styles.container}>
       <CardContent>
@@ -24,8 +28,8 @@ const BookingItem = ({
             </Grid>
             <Grid item md={3}>
               <div style={styles.logo}>
-                <h1>Booking</h1>
-                <h3>{date}</h3>
+                <h1>{isNotApprove ? "Booking" : "INVOICE"}</h1>
+                <h3>{isNotApprove ? "date" : dateInvoice}</h3>
               </div>
             </Grid>
           </Grid>
@@ -82,8 +86,16 @@ const BookingItem = ({
             <Grid item md={3}>
               <Grid container>
                 <Grid item xs={12} style={styles.buktiPembayaran}>
-                  <div style={styles.imagePembayaran} />
-                  <p>Upload Payment Proof</p>
+                  <div
+                    style={{
+                      ...styles.imagePembayaran,
+                      backgroundImage: `url("${
+                        isNotApprove ? "" : invoiceImage
+                      }")`,
+                    }}
+                  />
+                  {isNotApprove && <p>Upload Payment Proof</p>}
+                  {!isNotApprove && <h2>{invoiceNumber}</h2>}
                 </Grid>
               </Grid>
             </Grid>
