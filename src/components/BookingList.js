@@ -8,7 +8,7 @@ const dataBookings = [
       name: "House Astina",
       address:
         "Jl. Elang IV Perum Permata Bintaro Residence, Pondok Aren,Tangerang Selatan",
-      amenities: "Furnished",
+      amenities: ["Furnished"],
       typeOfRent: "Year",
     },
     checkIn: "30 March 2020",

@@ -59,7 +59,7 @@ const BookingItem = ({
                     <Grid item xs={6}>
                       <span style={styles.titleSub}>Amenities</span>
                       <br />
-                      <span>{property.amenities}</span>
+                      <span>{property.amenities.join(", ")}</span>
                     </Grid>
                   </Grid>
                 </Grid>
