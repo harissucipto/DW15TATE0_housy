@@ -15,7 +15,7 @@ const dataBookings = [
     checkOut: "31 March 2021",
     date: "Saturday, 30 March 2020",
     longTimeRent: "1 Year",
-    status: "approved",
+    status: "cancel",
   },
 ];
 

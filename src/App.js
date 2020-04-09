@@ -1,8 +1,8 @@
 import React from "react";
-import MyHistory from "./pages/MyHistory";
+import MyBooking from "./pages/MyBooking";
 
 function App() {
-  return <MyHistory />;
+  return <MyBooking />;
 }
 
 export default App;

@@ -15,7 +15,7 @@ const dataBookings = [
     checkOut: "31 March 2021",
     date: "Saturday, 30 March 2020",
     longTimeRent: "1 Year",
-    status: "approved",
+    status: "approve",
     invoiceImage: "sks",
     invoiceNumber: "TCK010",
     dateInvoice: "Sunday, 31 March 2020",
@@ -26,7 +26,7 @@ const HistoryList = () => {
   return (
     <div>
       {dataBookings
-        .filter((data) => data.status === "approved")
+        .filter((data) => data.status === "approve")
         .map((data) => (
           <BookingItem key={data.id} {...data} />
         ))}

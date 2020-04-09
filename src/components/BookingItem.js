@@ -6,6 +6,7 @@ import Logo from "../images/logo.PNG";
 import BookingCustomer from "./BookingCustomer";
 import Pay from "./Pay";
 import StatusPayment from "./StatusPayment";
+import ActionOwnerToTransaction from "./ActionOwnerToTransaction";
 
 const BookingItem = ({
   property,
@@ -13,11 +14,13 @@ const BookingItem = ({
   checkIn,
   checkOut,
   invoiceImage,
-  status = "notYet",
+  status = "cancel",
   invoiceNumber,
   dateInvoice,
 }) => {
-  const isNotApprove = status !== "approved";
+  const isNotApprove = status !== "approve";
+  const isOwner = true;
+
   return (
     <Card variant="outlined" style={styles.container}>
       <CardContent>
@@ -29,7 +32,7 @@ const BookingItem = ({
             <Grid item md={3}>
               <div style={styles.logo}>
                 <h1>{isNotApprove ? "Booking" : "INVOICE"}</h1>
-                <h3>{isNotApprove ? "date" : dateInvoice}</h3>
+                <h3>{isNotApprove ? date : dateInvoice}</h3>
               </div>
             </Grid>
           </Grid>
@@ -105,13 +108,17 @@ const BookingItem = ({
         <BookingCustomer status={status} />
         <br />
 
-        {status === "notYet" && (
-          <Grid container justify="flex-end">
-            <Grid item md={4}>
-              <Pay />
+        <Grid container>
+          <Grid item md={8} />
+          <Grid item md={4}>
+            <Grid container>
+              {status === "cancel" && !isOwner ? <Pay /> : null}
+              {status !== "approve" && isOwner ? (
+                <ActionOwnerToTransaction />
+              ) : null}
             </Grid>
           </Grid>
-        )}
+        </Grid>
       </CardContent>
     </Card>
   );

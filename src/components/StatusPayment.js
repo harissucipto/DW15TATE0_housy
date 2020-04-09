@@ -2,26 +2,24 @@ import React from "react";
 import { Button } from "@material-ui/core";
 
 const textStatus = {
-  notYet: "Waiting Payment",
-  approve: "Waiting Approve",
-  approved: "Approve",
+  cancel: "Waiting Payment",
+  pending: "Waiting Approve",
+  approve: "Approve",
 };
 
 const colorStatus = {
-  notYet: "secondary",
-  approve: "inherit",
-  approved: "primary",
+  cancel: "red",
+  pending: "#F7941E",
+  approve: "green",
 };
 
 const StatusPayment = ({ status = "notYet" }) => {
   return (
-    <Button
-      variant="outlined"
-      color={colorStatus[status] || "secondary"}
-      size="small"
-    >
-      {textStatus[status] || status}
-    </Button>
+    <div style={{ color: colorStatus[status] }}>
+      <Button variant="outlined" color="inherit" size="small">
+        {textStatus[status] || status}
+      </Button>
+    </div>
   );
 };
 

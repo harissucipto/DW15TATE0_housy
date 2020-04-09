@@ -6,11 +6,11 @@ import User from "./User";
 
 const Auth = () => {
   const [user] = useState({
-    type: "Owner",
+    type: "user",
   });
 
   const isLogin = user.type;
-  const isUser = user.type === "Owner";
+  const isUser = user.type === "user";
 
   return (
     <div>

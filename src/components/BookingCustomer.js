@@ -11,9 +11,9 @@ import {
 } from "@material-ui/core";
 
 const colorStatus = {
-  notYet: "red",
-  approve: "black",
-  approved: "#3f51b5",
+  cancel: "red",
+  pending: "#F7941E",
+  approve: "green",
 };
 
 const customers = [
@@ -100,7 +100,7 @@ const styles = {
     fontSize: "18px",
   },
   content: {
-    fontWeight: "20px",
+    fontSize: "20px",
     color: "grey",
   },
 };
