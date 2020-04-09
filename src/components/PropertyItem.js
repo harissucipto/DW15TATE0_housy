@@ -4,7 +4,15 @@ import { Card, CardContent } from "@material-ui/core";
 
 const PropertyItem = () => {
   return (
-    <Card style={{ width: "100%" }} variant="outlined">
+    <Card
+      style={{
+        width: "100%",
+        padding: "10px",
+        boxSizing: "border-box",
+        borderRadius: "5px",
+      }}
+      variant="outlined"
+    >
       <div
         style={{
           // backgroundImage: `url("${SampleImage}")`,
@@ -13,6 +21,7 @@ const PropertyItem = () => {
           backgroundSize: "cover",
           position: "relative",
           backgroundColor: "blue",
+          borderRadius: "5px",
         }}
         alt="logo"
       >
