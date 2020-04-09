@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Signin from "./Signin";
 import Signup from "./Signup";
 import User from "./User";
+import Owner from "./Owner";
 
 const Auth = () => {
   const [user] = useState({
@@ -10,14 +11,16 @@ const Auth = () => {
   });
 
   const isLogin = user.type;
-  const isUser = user.type === "user";
+  const isUser = user.type === "owner";
 
   return (
     <div>
       {isLogin ? (
         isUser ? (
           <User />
-        ) : null
+        ) : (
+          <Owner />
+        )
       ) : (
         <>
           <Signin />

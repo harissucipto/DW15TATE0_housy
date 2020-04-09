@@ -3,18 +3,18 @@ import { Avatar, Menu, MenuItem } from "@material-ui/core";
 import {
   ExitToApp,
   PermIdentity,
-  EventNote,
+  HomeOutlined,
   RestorePage,
 } from "@material-ui/icons";
 
-const User = () => {
+const Owner = () => {
   const [anchorEl, setAncorEl] = useState(null);
   const handleClick = (evt) => setAncorEl(evt.currentTarget);
   const handleClose = () => setAncorEl(null);
 
   return (
     <>
-      <Avatar onClick={handleClick}>HS</Avatar>
+      <Avatar onClick={handleClick}>Owner</Avatar>
       <Menu
         style={{ marginTop: "55px" }}
         anchorEl={anchorEl}
@@ -27,8 +27,8 @@ const User = () => {
           <span style={styles.titleIcon}>Profile </span>
         </MenuItem>
         <MenuItem>
-          <EventNote color="primary" />
-          <span style={styles.titleIcon}>My Booking</span>
+          <HomeOutlined color="primary" />
+          <span style={styles.titleIcon}>Add Property</span>
         </MenuItem>
         <MenuItem>
           <RestorePage color="primary" />
@@ -51,4 +51,4 @@ const styles = {
   },
 };
 
-export default User;
+export default Owner;
