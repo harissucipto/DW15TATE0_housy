@@ -5,9 +5,20 @@ import { useHistory } from "react-router-dom";
 // import SampleImage from "../images/sample-property.PNG";
 import { DETAIL_PROPERTY } from "../constants/routes";
 
-const PropertyItem = ({ images, price, typeOfRent, amenities }) => {
+const PropertyItem = ({
+  id,
+  images,
+  price,
+  typeOfRent,
+  amenities,
+  bedrooms,
+  baths,
+  area,
+  address,
+}) => {
   const history = useHistory();
-  const handleNavigate = () => history.push(DETAIL_PROPERTY);
+  const handleNavigate = (id) => () =>
+    history.push(DETAIL_PROPERTY, { state: { id } });
 
   const [image] = images;
 
@@ -21,7 +32,7 @@ const PropertyItem = ({ images, price, typeOfRent, amenities }) => {
         cursor: "pointer",
       }}
       variant="outlined"
-      onClick={handleNavigate}
+      onClick={handleNavigate(id)}
     >
       <div
         style={{
@@ -38,15 +49,27 @@ const PropertyItem = ({ images, price, typeOfRent, amenities }) => {
         <div
           style={{
             position: "absolute",
-            backgroundColor: "white",
-            padding: "4px 11px",
             margin: 16,
             color: "black",
             fontWeight: "bold",
-            borderRadius: "3px",
+            display: "flex",
+            flexWrap: "wrap",
           }}
         >
-          {amenities.join(", ")}
+          {amenities.map((item) => (
+            <span
+              style={{
+                backgroundColor: "white",
+                marginRight: "5px",
+                marginBottom: "5px",
+                padding: "4px 11px",
+                borderRadius: "3px",
+              }}
+              key={item}
+            >
+              {item}
+            </span>
+          ))}
         </div>
       </div>
       <CardContent>
@@ -57,8 +80,11 @@ const PropertyItem = ({ images, price, typeOfRent, amenities }) => {
           }).format(price)}{" "}
           / {typeOfRent}
         </h2>
-        <h3>3 Beds, 2 Baths, 1.8000 sqft</h3>
-        <p>Tanggerang Selatan, Padak Aren</p>
+        <h3>
+          {" "}
+          {bedrooms} Beds, {baths} Baths, {area} sqft
+        </h3>
+        <p>{address}</p>
       </CardContent>
     </Card>
   );

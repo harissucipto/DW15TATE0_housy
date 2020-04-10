@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Grid } from "@material-ui/core";
+import { useStoreState } from "easy-peasy";
 
 import PropertyItem from "./PropertyItem";
-import data from "../constants/data.json";
-
-const listData = Array(9).fill(1);
 
 const PropertyList = () => {
-  const [properies, setProperties] = useState([]);
-  useEffect(() => {
-    setProperties(data);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { data } = useStoreState(({ properties }) => properties);
+
   return (
     <div
       style={{
@@ -21,7 +16,7 @@ const PropertyList = () => {
       }}
     >
       <Grid container>
-        {properies.map((property, index) => (
+        {data.map((property, index) => (
           <Grid
             item
             md={6}
@@ -36,6 +31,11 @@ const PropertyList = () => {
             <PropertyItem {...property} />
           </Grid>
         ))}
+        {data.length === 0 && (
+          <div>
+            <h3 style={{ textAlign: "center" }}>Tidak Ada Data</h3>
+          </div>
+        )}
       </Grid>
     </div>
   );
