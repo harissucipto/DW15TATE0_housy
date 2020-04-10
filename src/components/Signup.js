@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Dialog,
   Button,
@@ -6,6 +6,7 @@ import {
   TextField,
   MenuItem,
 } from "@material-ui/core";
+import { useStoreState, useStoreActions } from "easy-peasy";
 
 const genders = [
   {
@@ -30,9 +31,12 @@ const listAses = [
 ];
 
 const Signup = () => {
-  const [open, setOpen] = useState(false);
+  const { open } = useStoreState(({ signup }) => signup);
+  const { setOpen } = useStoreActions(({ signup }) => signup);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   return (
     <>
       <Button variant="contained" onClick={handleOpen}>

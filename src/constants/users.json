@@ -1,0 +1,22 @@
+[
+  {
+    "fullName": "Haris Sucipto",
+    "username": "harissucipto",
+    "email": "harisssucipto@gmail.com",
+    "password": "a",
+    "status": "tenant",
+    "gender": "male",
+    "phone": "0895326993126",
+    "address": "Buru Karimun"
+  },
+  {
+    "fullName": "pemilik",
+    "username": "pemilik",
+    "email": "harisssucipto@gmail.com",
+    "password": "b",
+    "status": "owner",
+    "gender": "male",
+    "phone": "0895326993126",
+    "address": "Buru Karimun"
+  }
+]

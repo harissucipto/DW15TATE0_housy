@@ -6,8 +6,8 @@
     "price": 13000000,
     "typeOfRent": "year",
     "amenities": ["Furnished"],
-    "bedrooms": 3,
-    "baths": 2,
+    "bedrooms": 5,
+    "baths": 4,
     "area": 18000,
     "address": "Tanggerang Selatan, Pondok Aren"
   },
@@ -18,8 +18,8 @@
     "price": 13000000,
     "typeOfRent": "year",
     "amenities": ["Furnished"],
-    "bedrooms": 3,
-    "baths": 2,
+    "bedrooms": 1,
+    "baths": 3,
     "area": 600,
     "address": "Tanggerang Selatan, Pondok Aren"
   },

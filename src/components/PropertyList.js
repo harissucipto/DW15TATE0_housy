@@ -6,7 +6,7 @@ import PropertyItem from "./PropertyItem";
 
 const filterProperties = (
   data,
-  { searchLocation = "", typeOfRent, bedrooms, amenities, budget }
+  { searchLocation = "", typeOfRent, bedrooms, baths, amenities, budget }
 ) => {
   return data.filter((data) => {
     const isLocation = data.address
@@ -16,6 +16,7 @@ const filterProperties = (
       ? true
       : data.typeOfRent === typeOfRent;
     const isBedroom = !Boolean(bedrooms) ? true : data.bedrooms === bedrooms;
+    const isBath = !Boolean(baths) ? true : data.baths === baths;
     const isAmenities = Object.values(amenities).every((value) => !value)
       ? true
       : Object.keys(amenities)
@@ -23,7 +24,14 @@ const filterProperties = (
           .every((item) => data.amenities.includes(item));
 
     const isBudget = !Boolean(budget) ? true : data.price <= Number(budget);
-    return isLocation && isTypeOfRent && isBedroom && isAmenities && isBudget;
+    return (
+      isLocation &&
+      isTypeOfRent &&
+      isBedroom &&
+      isBath &&
+      isAmenities &&
+      isBudget
+    );
   });
 };
 
@@ -58,7 +66,7 @@ const PropertyList = () => {
             </Grid>
           )
         )}
-        {data.length === 0 && (
+        {filterProperties(data, { searchLocation, ...filter }).length === 0 && (
           <div>
             <h3 style={{ textAlign: "center" }}>Tidak Ada Data</h3>
           </div>

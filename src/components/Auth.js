@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useStoreState } from "easy-peasy";
 
 import Signin from "./Signin";
 import Signup from "./Signup";
@@ -6,15 +7,14 @@ import User from "./User";
 import Owner from "./Owner";
 
 const Auth = () => {
-  const [user] = useState({});
-
-  const isLogin = user.type;
-  const isUser = user.type === "user";
+  const { user } = useStoreState(({ users }) => users);
+  const isLogin = Boolean(user);
+  const isTenant = user ? user.status === "tenant" : "";
 
   return (
     <div>
       {isLogin ? (
-        isUser ? (
+        isTenant ? (
           <User />
         ) : (
           <Owner />
