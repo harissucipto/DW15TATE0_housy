@@ -4,19 +4,27 @@ import { Button } from "@material-ui/core";
 const listTypeOfRent = [
   {
     label: "Day",
-    value: "Day",
+    value: "day",
   },
   {
     label: "Month",
-    value: "Month",
+    value: "month",
   },
   {
     label: "Year",
-    value: "Year",
+    value: "year",
   },
 ];
 
-const TypeOfRent = ({ selected = "Year", onSelected = (f) => f }) => {
+const TypeOfRent = ({ selected, onSelected }) => {
+  const handleChange = (value) => () => {
+    if (value === selected) {
+      onSelected("");
+      return;
+    }
+    onSelected(value);
+  };
+
   return (
     <div>
       <h3>Type of Rent</h3>
@@ -24,7 +32,7 @@ const TypeOfRent = ({ selected = "Year", onSelected = (f) => f }) => {
         <Button
           key={value}
           variant="contained"
-          onClick={onSelected}
+          onClick={handleChange(value)}
           style={{ marginRight: "37px" }}
           color={value === selected ? "primary" : "default"}
         >

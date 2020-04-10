@@ -46,7 +46,27 @@ const listBathroom = [
   },
 ];
 
-const PropertyRoom = ({ bedroomSelected = 2, bathroomSelected = 3 }) => {
+const PropertyRoom = ({
+  bedroomSelected,
+  onSelectedBedroom,
+  bathroomSelected,
+  onSelectedBaths,
+}) => {
+  const handleChangeBedroom = (value) => () => {
+    if (value === bedroomSelected) {
+      onSelectedBedroom(null);
+      return;
+    }
+    onSelectedBedroom(value);
+  };
+  const handleChangeBaths = (value) => () => {
+    if (value === bathroomSelected) {
+      onSelectedBaths(null);
+      return;
+    }
+    onSelectedBaths(value);
+  };
+
   return (
     <div>
       <h3>Property Room</h3>
@@ -57,6 +77,7 @@ const PropertyRoom = ({ bedroomSelected = 2, bathroomSelected = 3 }) => {
             key={value}
             variant="contained"
             style={{ marginRight: "25px" }}
+            onClick={handleChangeBedroom(value)}
             color={value === bedroomSelected ? "primary" : "default"}
           >
             {label}
@@ -70,6 +91,7 @@ const PropertyRoom = ({ bedroomSelected = 2, bathroomSelected = 3 }) => {
           <Button
             key={value}
             variant="contained"
+            onClick={handleChangeBaths(value)}
             style={{ marginRight: "25px" }}
             color={value === bathroomSelected ? "primary" : "default"}
           >

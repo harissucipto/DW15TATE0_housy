@@ -16,7 +16,13 @@ const listAmneties = [
   },
 ];
 
-const Amneties = ({ amnetiesSelected = "Furnished" }) => {
+const Amneties = ({ data, onChecked }) => {
+  const handleChange = (prop) => (evt) => {
+    onChecked({
+      ...data,
+      [prop]: evt.target.checked,
+    });
+  };
   return (
     <div>
       <h3>Amenities</h3>
@@ -34,7 +40,8 @@ const Amneties = ({ amnetiesSelected = "Furnished" }) => {
           <p>{label} </p>
           <Checkbox
             color="primary"
-            defaultChecked={value === amnetiesSelected}
+            onChange={handleChange(value)}
+            checked={data[value]}
           />
         </div>
       ))}

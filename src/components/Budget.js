@@ -1,7 +1,11 @@
 import React from "react";
 import { Grid, TextField } from "@material-ui/core";
 
-const Budget = () => {
+const Budget = ({ value, onChange }) => {
+  const handleChange = (evt) => {
+    const valueOfNumber = Number(evt.target.value) > 0 ? evt.target.value : "";
+    onChange(valueOfNumber);
+  };
   return (
     <div>
       <h3>Budget</h3>
@@ -18,7 +22,12 @@ const Budget = () => {
           <h5>Less than IDR.</h5>
         </Grid>
         <Grid xs={8} item>
-          <TextField fullWidth variant="filled" />
+          <TextField
+            value={value}
+            onChange={handleChange}
+            fullWidth
+            variant="filled"
+          />
         </Grid>
       </Grid>
     </div>
