@@ -1,14 +1,19 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
+import { HOME } from "../constants/routes";
 import Logo from "./Logo";
 import SearchLocation from "./SearchLocation";
 import Auth from "./Auth";
 import "./Header.css";
 
 const Header = () => {
+  const history = useHistory();
+  const handleNavigate = (path) => () => history.push(path);
+
   return (
     <div className="header">
-      <Logo />
+      <Logo onClick={handleNavigate(HOME)} />
       <div
         style={{
           display: "flex",

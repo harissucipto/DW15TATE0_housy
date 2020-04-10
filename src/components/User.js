@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Avatar, Menu, MenuItem } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 import {
   ExitToApp,
   PermIdentity,
@@ -7,10 +8,15 @@ import {
   RestorePage,
 } from "@material-ui/icons";
 
+import { PROFILE, MY_BOOKING, MY_HISTORY, HOME } from "../constants/routes";
+
 const User = () => {
   const [anchorEl, setAncorEl] = useState(null);
   const handleClick = (evt) => setAncorEl(evt.currentTarget);
   const handleClose = () => setAncorEl(null);
+
+  const history = useHistory();
+  const handleNavigate = (path) => () => history.push(path);
 
   return (
     <>
@@ -22,20 +28,20 @@ const User = () => {
         keepMounted
         onClose={handleClose}
       >
-        <MenuItem>
+        <MenuItem onClick={handleNavigate(PROFILE)}>
           <PermIdentity color="primary" />
           <span style={styles.titleIcon}>Profile </span>
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={handleNavigate(MY_BOOKING)}>
           <EventNote color="primary" />
           <span style={styles.titleIcon}>My Booking</span>
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={handleNavigate(MY_HISTORY)}>
           <RestorePage color="primary" />
           <span style={styles.titleIcon}>History</span>
         </MenuItem>
         <hr />
-        <MenuItem>
+        <MenuItem onClick={handleNavigate(HOME)}>
           <ExitToApp color="primary" />
           <span style={styles.titleIcon}>Logout</span>
         </MenuItem>

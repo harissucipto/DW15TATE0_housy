@@ -7,7 +7,7 @@ import Owner from "./Owner";
 
 const Auth = () => {
   const [user] = useState({
-    type: "owner",
+    type: "user",
   });
 
   const isLogin = user.type;
