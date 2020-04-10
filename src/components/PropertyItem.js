@@ -1,9 +1,16 @@
 import React from "react";
 import { Card, CardContent } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+
 // import SampleImage from "../images/sample-property.PNG";
+import { DETAIL_PROPERTY } from "../constants/routes";
 
 const PropertyItem = ({ images, price, typeOfRent, amenities }) => {
+  const history = useHistory();
+  const handleNavigate = () => history.push(DETAIL_PROPERTY);
+
   const [image] = images;
+
   return (
     <Card
       style={{
@@ -11,8 +18,10 @@ const PropertyItem = ({ images, price, typeOfRent, amenities }) => {
         padding: "10px",
         boxSizing: "border-box",
         borderRadius: "5px",
+        cursor: "pointer",
       }}
       variant="outlined"
+      onClick={handleNavigate}
     >
       <div
         style={{

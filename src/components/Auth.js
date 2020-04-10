@@ -1,17 +1,32 @@
-import React from "react";
-import { Button } from "@material-ui/core";
+import React, { useState } from "react";
+
+import Signin from "./Signin";
+import Signup from "./Signup";
+import User from "./User";
+import Owner from "./Owner";
 
 const Auth = () => {
+  const [user] = useState({
+    type: "user",
+  });
+
+  const isLogin = user.type;
+  const isUser = user.type === "user";
+
   return (
     <div>
-      <Button
-        style={{
-          marginRight: "20px",
-        }}
-      >
-        Sign in
-      </Button>
-      <Button variant="contained">Sign up</Button>
+      {isLogin ? (
+        isUser ? (
+          <User />
+        ) : (
+          <Owner />
+        )
+      ) : (
+        <>
+          <Signin />
+          <Signup />
+        </>
+      )}
     </div>
   );
 };

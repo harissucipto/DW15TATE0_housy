@@ -1,9 +1,11 @@
 import React from "react";
+
 import logoImage from "../images/logo.PNG";
 
-const Logo = () => {
+const Logo = ({ onClick = (f) => f }) => {
   return (
     <div
+      onClick={onClick}
       style={{
         width: "460px",
       }}
@@ -13,6 +15,7 @@ const Logo = () => {
         alt="logo"
         style={{
           height: "80px",
+          cursor: "pointer",
         }}
       />
     </div>

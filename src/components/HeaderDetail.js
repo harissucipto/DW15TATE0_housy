@@ -3,11 +3,10 @@ import { useHistory } from "react-router-dom";
 
 import { HOME } from "../constants/routes";
 import Logo from "./Logo";
-import SearchLocation from "./SearchLocation";
 import Auth from "./Auth";
 import "./Header.css";
 
-const Header = () => {
+const HeaderDetail = () => {
   const history = useHistory();
   const handleNavigate = (path) => () => history.push(path);
 
@@ -18,16 +17,15 @@ const Header = () => {
         style={{
           display: "flex",
           flex: 1,
-          justifyContent: "space-between",
+          justifyContent: "flex-end",
           flexWrap: "wrap",
           paddingLeft: "50px",
         }}
       >
-        <SearchLocation />
         <Auth />
       </div>
     </div>
   );
 };
 
-export default Header;
+export default HeaderDetail;
