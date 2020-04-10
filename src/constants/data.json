@@ -1,0 +1,62 @@
+[
+  {
+    "id": "01",
+    "images": ["p1.png", "", "", "", ""],
+    "name": "",
+    "price": 13000000,
+    "typeOfRent": "year",
+    "amenities": ["Furnished"],
+    "bedrooms": 3,
+    "baths": 2,
+    "area": 18000,
+    "address": "Tanggerang Selatan, Pondok Aren"
+  },
+  {
+    "id": "02",
+    "images": ["p2.png", "", "", "", ""],
+    "name": "",
+    "price": 13000000,
+    "typeOfRent": "year",
+    "amenities": ["Furnished"],
+    "bedrooms": 3,
+    "baths": 2,
+    "area": 600,
+    "address": "Tanggerang Selatan, Pondok Aren"
+  },
+  {
+    "id": "03",
+    "images": ["p3.png", "", "", "", ""],
+    "name": "",
+    "price": 80000,
+    "typeOfRent": "day",
+    "amenities": ["Shared Accomodation"],
+    "bedrooms": 3,
+    "baths": 2,
+    "area": 600,
+    "address": "Buru Karimun"
+  },
+  {
+    "id": "04",
+    "images": ["p4.png", "", "", "", ""],
+    "name": "",
+    "price": 100000,
+    "typeOfRent": "month",
+    "amenities": ["Shared Accomodation", "Furnished"],
+    "bedrooms": 3,
+    "baths": 2,
+    "area": 600,
+    "address": "Buru Karimun"
+  },
+  {
+    "id": "05",
+    "images": ["", "", "", "", ""],
+    "name": "",
+    "price": 1022000,
+    "typeOfRent": "year",
+    "amenities": ["Shared Accomodation", "Furnished"],
+    "bedrooms": 3,
+    "baths": 2,
+    "area": 600,
+    "address": "Buru Karimun"
+  }
+]

@@ -2,7 +2,8 @@ import React from "react";
 import { Card, CardContent } from "@material-ui/core";
 // import SampleImage from "../images/sample-property.PNG";
 
-const PropertyItem = () => {
+const PropertyItem = ({ images, price, typeOfRent, amenities }) => {
+  const [image] = images;
   return (
     <Card
       style={{
@@ -15,12 +16,12 @@ const PropertyItem = () => {
     >
       <div
         style={{
-          // backgroundImage: `url("${SampleImage}")`,
+          backgroundImage: image && `url("${require(`../images/${image}`)}")`,
           width: "100%",
           height: "180px",
           backgroundSize: "cover",
           position: "relative",
-          backgroundColor: "blue",
+          backgroundColor: "grey",
           borderRadius: "5px",
         }}
         alt="logo"
@@ -28,21 +29,25 @@ const PropertyItem = () => {
         <div
           style={{
             position: "absolute",
-            top: 16,
-            left: 16,
             backgroundColor: "white",
             padding: "4px 11px",
-            margin: 0,
+            margin: 16,
             color: "black",
             fontWeight: "bold",
             borderRadius: "3px",
           }}
         >
-          Furnished
+          {amenities.join(", ")}
         </div>
       </div>
       <CardContent>
-        <h2>Rp. 9.0000.000 / Year</h2>
+        <h2>
+          Rp.{" "}
+          {new Intl.NumberFormat("id-ID", {
+            maximumSignificantDigits: 3,
+          }).format(price)}{" "}
+          / {typeOfRent}
+        </h2>
         <h3>3 Beds, 2 Baths, 1.8000 sqft</h3>
         <p>Tanggerang Selatan, Padak Aren</p>
       </CardContent>
