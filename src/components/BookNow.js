@@ -27,7 +27,6 @@ const BookNow = ({ propertyID }) => {
   const [checkIn, setCheckIn] = useState(formatDate(new Date()));
   const [checkOut, setCheckOut] = useState(formatDate(new Date()));
   const saveValue = (setState) => (evt) => {
-    console.log(typeof evt.target.value);
     setState(evt.target.value);
   };
 
