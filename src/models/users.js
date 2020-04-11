@@ -23,7 +23,7 @@ const users = {
     return null;
   }),
   addUser: action((state, payload) => {
-    state.dataUsers.push({ ...payload, id: shortid(), profileImage: "" });
+    state.dataUsers.push(payload);
   }),
   onSignup: thunk((actions, payload, helper) => {
     const { dataUsers: users } = helper.getState();
@@ -34,8 +34,13 @@ const users = {
       return null;
     }
 
-    actions.addUser(payload);
-    actions.setUser(payload);
+    const dataUser = {
+      ...payload,
+      id: shortid(),
+      profileImage: "",
+    };
+    actions.addUser(dataUser);
+    actions.setUser(dataUser);
     return payload;
   }),
   onLogout: thunk((actions) => {

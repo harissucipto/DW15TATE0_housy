@@ -50,7 +50,7 @@ const PropertyList = () => {
     >
       <Grid container>
         {filterProperties(data, { searchLocation, ...filter }).map(
-          (property, index) => (
+          (property) => (
             <Grid
               item
               md={6}

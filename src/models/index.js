@@ -6,7 +6,7 @@ import SignupModel from "./signup";
 import SigninModel from "./signin";
 
 const storeModel = {
-  myBooking: MyBookingModel,
+  myBooking: persist(MyBookingModel),
   properties: PropertiesModel,
   users: persist(UsersModel),
   signup: SignupModel,

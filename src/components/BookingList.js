@@ -1,31 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BookingItem from "./BookingItem";
+import { useStoreState, useStoreActions } from "easy-peasy";
+import Loading from "./Loading";
+import { Redirect } from "react-router-dom";
 
-const dataBookings = [
-  {
-    id: "ad2r23",
-    property: {
-      name: "House Astina",
-      address:
-        "Jl. Elang IV Perum Permata Bintaro Residence, Pondok Aren,Tangerang Selatan",
-      amenities: ["Furnished"],
-      typeOfRent: "Year",
-    },
-    checkIn: "30 March 2020",
-    checkOut: "31 March 2021",
-    date: "Saturday, 30 March 2020",
-    longTimeRent: "1 Year",
-    status: "cancel",
-  },
-];
+import { HOME } from "../constants/routes";
 
 const BookingList = () => {
+  const [loading, setLoading] = useState(true);
+  const [listData, setData] = useState([]);
+  const { getMyBooking } = useStoreActions(({ myBooking }) => myBooking);
+  const { user } = useStoreState(({ users }) => users);
+
+  useEffect(() => {
+    if (user && user.id) {
+      const respon = getMyBooking(user.id);
+      setData(respon);
+      setLoading(false);
+    }
+  }, [user, getMyBooking]);
+
+  if (!Boolean(user)) return <Redirect to={HOME} />;
+
   return (
     <div>
-      {dataBookings
-        .filter((data) => data.status !== "approved")
-        .map((data) => (
-          <BookingItem key={data.id} {...data} />
+      {!loading && !Boolean(listData.length) ? (
+        <div>
+          <h1>My Boking</h1>
+          <hr />
+          <h3>Tidak ada data</h3>
+        </div>
+      ) : null}
+      {loading && <Loading />}
+      {!loading &&
+        listData.map((data) => (
+          <BookingItem key={data.id} {...data} userStatus={user.status} />
         ))}
     </div>
   );

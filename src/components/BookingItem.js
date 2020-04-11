@@ -17,9 +17,10 @@ const BookingItem = ({
   status = "cancel",
   invoiceNumber,
   dateInvoice,
+  userStatus,
 }) => {
   const isNotApprove = status !== "approve";
-  const isOwner = true;
+  const isOwner = userStatus === "owner";
 
   return (
     <Card variant="outlined" style={styles.container}>
