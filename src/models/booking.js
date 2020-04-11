@@ -38,6 +38,26 @@ const MyBooking = {
 
     return myBooking;
   }),
+  getMyHistory: thunk((_actions, payload, helpers) => {
+    const { data } = helpers.getState();
+    const {
+      properties: { data: dataProperties },
+    } = helpers.getStoreState();
+
+    const myHistory = data
+      .filter((order) => {
+        return order.tenantId === payload && order.status === "approve";
+      })
+      .map((item) => {
+        const property = dataProperties.find((p) => p.id === item.propertyID);
+        return {
+          ...item,
+          property,
+        };
+      });
+
+    return myHistory;
+  }),
 };
 
 export default MyBooking;

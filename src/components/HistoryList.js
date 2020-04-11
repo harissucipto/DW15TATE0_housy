@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import BookingItem from "./BookingItem";
+import { useStoreState, useStoreActions } from "easy-peasy";
+import Loading from "./Loading";
 
 const dataBookings = [
   {
@@ -23,12 +25,32 @@ const dataBookings = [
 ];
 
 const HistoryList = () => {
+  const [loading, setLoading] = useState(true);
+  const [listData, setData] = useState([]);
+  const { getMyHistory } = useStoreActions(({ myBooking }) => myBooking);
+  const { user } = useStoreState(({ users }) => users);
+
+  useEffect(() => {
+    if (user && user.id) {
+      const respon = getMyHistory(user.id);
+      setData(respon);
+      setLoading(false);
+    }
+  }, [user, getMyHistory]);
+
   return (
     <div>
-      {dataBookings
-        .filter((data) => data.status === "approve")
-        .map((data) => (
-          <BookingItem key={data.id} {...data} />
+      {!loading && !Boolean(listData.length) ? (
+        <div>
+          <h1>My History</h1>
+          <hr />
+          <h3>Tidak ada data</h3>
+        </div>
+      ) : null}
+      {loading && <Loading />}
+      {!loading &&
+        listData.map((data) => (
+          <BookingItem key={data.id} {...data} userStatus={user.status} />
         ))}
     </div>
   );
