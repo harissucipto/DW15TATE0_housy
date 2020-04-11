@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Avatar, Menu, MenuItem } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import { useStoreState, useStoreActions } from "easy-peasy";
 import {
   ExitToApp,
   PermIdentity,
@@ -18,9 +19,29 @@ const User = () => {
   const history = useHistory();
   const handleNavigate = (path) => () => history.push(path);
 
+  const { user } = useStoreState(({ users }) => users);
+  const titleAvatar = user.fullName
+    .split(" ")
+    .map((item) => item.slice(0, 1))
+    .join("")
+    .toUpperCase();
+
+  const { onLogout } = useStoreActions(({ users }) => users);
+  const handleLogout = () => {
+    onLogout();
+    history.push(HOME);
+  };
+
   return (
     <>
-      <Avatar onClick={handleClick}>HS</Avatar>
+      <Avatar
+        onClick={handleClick}
+        style={{
+          backgroundColor: "maroon",
+        }}
+      >
+        {titleAvatar}
+      </Avatar>
       <Menu
         style={{ marginTop: "55px" }}
         anchorEl={anchorEl}
@@ -41,7 +62,7 @@ const User = () => {
           <span style={styles.titleIcon}>History</span>
         </MenuItem>
         <hr />
-        <MenuItem onClick={handleNavigate(HOME)}>
+        <MenuItem onClick={handleLogout}>
           <ExitToApp color="primary" />
           <span style={styles.titleIcon}>Logout</span>
         </MenuItem>

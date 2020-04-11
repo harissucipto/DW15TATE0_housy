@@ -22,7 +22,7 @@ const users = {
     return null;
   }),
   addUser: action((state, payload) => {
-    state.users = [...state.dataUsers, payload];
+    state.dataUsers.push(payload);
   }),
   onSignup: thunk((actions, payload, helper) => {
     const { dataUsers: users } = helper.getState();
@@ -36,6 +36,10 @@ const users = {
     actions.addUser(payload);
     actions.setUser(payload);
     return payload;
+  }),
+  onLogout: thunk((actions) => {
+    actions.setUser(null);
+    return true;
   }),
 };
 

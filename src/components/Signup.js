@@ -71,7 +71,6 @@ const Signup = () => {
     }
 
     const user = onSignup(newUser);
-    console.log(user);
     if (!Boolean(user)) {
       console.log("data bermasalah");
       return;
