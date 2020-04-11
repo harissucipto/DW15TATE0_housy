@@ -3,26 +3,26 @@ import BookingItem from "./BookingItem";
 import { useStoreState, useStoreActions } from "easy-peasy";
 import Loading from "./Loading";
 
-const dataBookings = [
-  {
-    id: "ad2r23",
-    property: {
-      name: "House Astina",
-      address:
-        "Jl. Elang IV Perum Permata Bintaro Residence, Pondok Aren,Tangerang Selatan",
-      amenities: ["Furnished"],
-      typeOfRent: "Year",
-    },
-    checkIn: "30 March 2020",
-    checkOut: "31 March 2021",
-    date: "Saturday, 30 March 2020",
-    longTimeRent: "1 Year",
-    status: "approve",
-    invoiceImage: "sks",
-    invoiceNumber: "TCK010",
-    dateInvoice: "Sunday, 31 March 2020",
-  },
-];
+// const dataBookings = [
+//   {
+//     id: "ad2r23",
+//     property: {
+//       name: "House Astina",
+//       address:
+//         "Jl. Elang IV Perum Permata Bintaro Residence, Pondok Aren,Tangerang Selatan",
+//       amenities: ["Furnished"],
+//       typeOfRent: "Year",
+//     },
+//     checkIn: "30 March 2020",
+//     checkOut: "31 March 2021",
+//     date: "Saturday, 30 March 2020",
+//     longTimeRent: "1 Year",
+//     status: "approve",
+//     invoiceImage: "sks",
+//     invoiceNumber: "TCK010",
+//     dateInvoice: "Sunday, 31 March 2020",
+//   },
+// ];
 
 const HistoryList = () => {
   const [loading, setLoading] = useState(true);
