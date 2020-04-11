@@ -21,6 +21,22 @@ const users = {
 
     return null;
   }),
+  addUser: action((state, payload) => {
+    state.users = [...state.dataUsers, payload];
+  }),
+  onSignup: thunk((actions, payload, helper) => {
+    const { dataUsers: users } = helper.getState();
+    const { username } = payload;
+    // check uniq username
+    const isUniqUsername = users.every((item) => item.username !== username);
+    if (!isUniqUsername) {
+      return null;
+    }
+
+    actions.addUser(payload);
+    actions.setUser(payload);
+    return payload;
+  }),
 };
 
 export default users;
