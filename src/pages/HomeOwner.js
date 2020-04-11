@@ -1,9 +1,15 @@
 import React from "react";
+import { useStoreState } from "easy-peasy";
+import { Redirect } from "react-router-dom";
 
+import { HOME } from "../constants/routes";
 import HeaderDetail from "../components/HeaderDetail";
 import IncomingTransaction from "../components/IncomingTransaction";
 
 const HomeOwner = () => {
+  const { user } = useStoreState(({ users }) => users);
+  if (!Boolean(user)) return <Redirect to={HOME} />;
+
   return (
     <div>
       <HeaderDetail />

@@ -38,6 +38,7 @@ const User = () => {
         onClick={handleClick}
         style={{
           backgroundColor: "maroon",
+          cursor: "pointer",
         }}
       >
         {titleAvatar}
