@@ -1,5 +1,5 @@
-import MyBookingModel from "./myBooking";
-import PropertiesModel from "./properties";
+import MyBookingModel from "./booking";
+import PropertiesModel from "./dataProperties";
 import UsersModel from "./users";
 import SignupModel from "./signup";
 
