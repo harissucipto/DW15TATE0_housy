@@ -7,7 +7,8 @@ const ProfileImage = ({ image }) => {
       <div
         style={{
           ...styles.image,
-          backgroundImage: `url("${image}")`,
+          backgroundImage:
+            Boolean(image) && `url("${require(`../images/${image}`)}")`,
         }}
       />
       <Button fullWidth variant="contained" color="primary">

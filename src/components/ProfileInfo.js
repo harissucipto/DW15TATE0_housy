@@ -11,15 +11,6 @@ import {
 } from "@material-ui/icons";
 import ChangePassword from "./ChangePassword";
 
-const profile = {
-  fullName: "Haris Sucipto",
-  email: "harisssucipto@gmail.com",
-  status: "tenant",
-  gender: "male",
-  phone: "0895326993126",
-  address: "Jl. lundang Panjang, Buru Karimun",
-};
-
 const _renderValueText = (text, firstUpperCase) =>
   text.length && firstUpperCase
     ? text.slice(0, 1).toUpperCase().concat(text.slice(1))
@@ -53,7 +44,7 @@ const TextInfo = ({ title, value, Icon, onClick, firstUpperCase = true }) => (
   </>
 );
 
-const ProfileInfo = () => {
+const ProfileInfo = ({ fullName, email, status, gender, phone, address }) => {
   const [openChangePassword, setOpenChangePassword] = useState(false);
   const handleCloseChangePassword = () => setOpenChangePassword(false);
   const handleOpenChangePassword = () => setOpenChangePassword(true);
@@ -62,14 +53,10 @@ const ProfileInfo = () => {
     <div>
       <h2>Personal info</h2>
       <Grid container spacing={2}>
-        <TextInfo
-          title="Full name"
-          value={profile.fullName}
-          Icon={AccountCircle}
-        />
+        <TextInfo title="Full name" value={fullName} Icon={AccountCircle} />
         <TextInfo
           title="Email"
-          value={profile.email}
+          value={email}
           Icon={Email}
           firstUpperCase={false}
         />
@@ -79,10 +66,10 @@ const ProfileInfo = () => {
           Icon={Lock}
           onClick={handleOpenChangePassword}
         />
-        <TextInfo title="Status" value={profile.status} Icon={House} />
-        <TextInfo title="Gender" value={profile.gender} Icon={Wc} />
-        <TextInfo title="Mobile Phone" value={profile.phone} Icon={Phone} />
-        <TextInfo title="Address" value={profile.address} Icon={Room} />
+        <TextInfo title="Status" value={status} Icon={House} />
+        <TextInfo title="Gender" value={gender} Icon={Wc} />
+        <TextInfo title="Mobile Phone" value={phone} Icon={Phone} />
+        <TextInfo title="Address" value={address} Icon={Room} />
       </Grid>
       <ChangePassword
         open={openChangePassword}

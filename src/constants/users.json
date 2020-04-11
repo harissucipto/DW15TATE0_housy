@@ -8,7 +8,8 @@
     "status": "tenant",
     "gender": "male",
     "phone": "0895326993126",
-    "address": "Buru Karimun"
+    "address": "Buru Karimun",
+    "profileImage": "haris.jpg"
   },
   {
     "id": "02",
@@ -19,6 +20,7 @@
     "status": "owner",
     "gender": "male",
     "phone": "0895326993126",
-    "address": "Buru Karimun"
+    "address": "Buru Karimun",
+    "profileImage": ""
   }
 ]

@@ -23,7 +23,7 @@ const users = {
     return null;
   }),
   addUser: action((state, payload) => {
-    state.dataUsers.push({ ...payload, id: shortid() });
+    state.dataUsers.push({ ...payload, id: shortid(), profileImage: "" });
   }),
   onSignup: thunk((actions, payload, helper) => {
     const { dataUsers: users } = helper.getState();
@@ -40,6 +40,30 @@ const users = {
   }),
   onLogout: thunk((actions) => {
     actions.setUser(null);
+    return true;
+  }),
+  updateUser: action((state, payload) => {
+    const { user, dataUsers } = state;
+    const dataUserUpdate = {
+      ...user,
+      ...payload,
+    };
+    const dataUsersUpdate = dataUsers.map((item) => {
+      if (item.id !== user.id) return item;
+      return {
+        ...item,
+        ...dataUserUpdate,
+      };
+    });
+
+    state.user = dataUserUpdate;
+    state.dataUsers = dataUsersUpdate;
+  }),
+  onChangePassword: thunk((actions, payload) => {
+    actions.updateUser({
+      password: payload,
+    });
+
     return true;
   }),
 };
