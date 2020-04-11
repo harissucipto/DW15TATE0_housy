@@ -11,7 +11,7 @@ const SearchLocation = () => {
   const handleSearch = () => changeFilter({ ...filter, searchLocation });
 
   return (
-    <div style={{ width: "400px", height: "50px" }}>
+    <div style={{ width: "400px", height: "50px", boxSizing: "border-box" }}>
       <TextField
         variant="filled"
         placeholder="Cari Lokasi"

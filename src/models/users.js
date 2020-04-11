@@ -1,4 +1,5 @@
 import { action, thunk } from "easy-peasy";
+import shortid from "shortid";
 
 import listUser from "../constants/users.json";
 
@@ -22,7 +23,7 @@ const users = {
     return null;
   }),
   addUser: action((state, payload) => {
-    state.dataUsers.push(payload);
+    state.dataUsers.push({ ...payload, id: shortid() });
   }),
   onSignup: thunk((actions, payload, helper) => {
     const { dataUsers: users } = helper.getState();

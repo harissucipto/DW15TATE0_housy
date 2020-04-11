@@ -1,13 +1,16 @@
+import { persist } from "easy-peasy";
 import MyBookingModel from "./booking";
 import PropertiesModel from "./dataProperties";
 import UsersModel from "./users";
 import SignupModel from "./signup";
+import SigninModel from "./signin";
 
 const storeModel = {
   myBooking: MyBookingModel,
   properties: PropertiesModel,
-  users: UsersModel,
+  users: persist(UsersModel),
   signup: SignupModel,
+  signin: SigninModel,
 };
 
 export default storeModel;

@@ -1,62 +1,77 @@
 [
   {
     "id": "01",
-    "images": ["p1.png", "", "", "", ""],
-    "name": "",
+    "images": [
+      "p1.png",
+      "p1extra1.png",
+      "p1extra2.png",
+      "p1extra3.png",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "name": "House Astina",
     "price": 13000000,
     "typeOfRent": "year",
     "amenities": ["Furnished"],
     "bedrooms": 5,
     "baths": 4,
     "area": 18000,
-    "address": "Tanggerang Selatan, Pondok Aren"
+    "address": "Tanggerang Selatan, Pondok Aren",
+    "description": "In ipsum tempor dolor qui culpa sunt ipsum pariatur adipisicing. Duis aute irure non quis tempor pariatur. Consequat officia irure nisi incididunt dolore ad voluptate. Cillum mollit minim magna aliqua id irure."
   },
   {
     "id": "02",
-    "images": ["p2.png", "", "", "", ""],
-    "name": "",
+    "images": ["p2.png", "", "", "", "", "", "", "", ""],
+    "name": "Rumah 2",
     "price": 13000000,
     "typeOfRent": "year",
     "amenities": ["Furnished"],
     "bedrooms": 1,
     "baths": 3,
     "area": 600,
-    "address": "Tanggerang Selatan, Pondok Aren"
+    "address": "Tanggerang Selatan, Pondok Aren",
+    "description": "Laboris non incididunt ullamco qui quis veniam ad laboris. Reprehenderit eiusmod in tempor labore qui ipsum cupidatat pariatur excepteur consequat. Eiusmod ullamco mollit in et nostrud proident nostrud consequat."
   },
   {
     "id": "03",
-    "images": ["p3.png", "", "", "", ""],
-    "name": "",
+    "images": ["p3.png", "", ""],
+    "name": "Rumah 3",
     "price": 80000,
     "typeOfRent": "day",
     "amenities": ["Shared Accomodation"],
     "bedrooms": 3,
     "baths": 2,
     "area": 600,
-    "address": "Buru Karimun"
+    "address": "Buru Karimun",
+    "description": "Aliquip anim amet nulla qui do irure commodo mollit. Aliqua quis tempor elit non sit in ex magna cupidatat duis deserunt quis. Incididunt do aute esse eu ex reprehenderit culpa. Aute tempor ullamco in id anim ad enim aliquip ipsum tempor consequat. Incididunt consectetur ea velit mollit exercitation irure sunt ullamco nostrud enim nostrud irure minim. Eiusmod do magna et dolor ut ullamco labore. Esse aliquip sunt labore voluptate veniam laborum dolore minim aute fugiat eiusmod."
   },
   {
     "id": "04",
     "images": ["p4.png", "", "", "", ""],
-    "name": "",
+    "name": "Rumah 4",
     "price": 100000,
     "typeOfRent": "month",
     "amenities": ["Shared Accomodation", "Furnished"],
     "bedrooms": 3,
     "baths": 2,
     "area": 600,
-    "address": "Buru Karimun"
+    "address": "Buru Karimun",
+    "description": "Consequat consequat cillum ut incididunt irure ut. Occaecat aute dolor labore dolor elit eu do quis exercitation sunt elit consequat amet duis. Mollit deserunt sit adipisicing Lorem aliqua laboris dolor id. Ea exercitation culpa qui ipsum. Magna ex eu commodo non eiusmod. In incididunt incididunt consectetur et excepteur in voluptate nostrud nostrud ipsum."
   },
   {
     "id": "05",
-    "images": ["", "", "", "", ""],
-    "name": "",
+    "images": [""],
+    "name": "Rumah 5",
     "price": 1022000,
     "typeOfRent": "year",
     "amenities": ["Shared Accomodation", "Furnished"],
     "bedrooms": 3,
     "baths": 2,
     "area": 600,
-    "address": "Buru Karimun"
+    "address": "Buru Karimun",
+    "description": "Est esse laboris non sint amet ullamco est ipsum mollit laboris laborum dolor quis. Sint in sunt quis occaecat laboris veniam dolore dolore aliqua reprehenderit in reprehenderit. Consectetur proident ea tempor reprehenderit amet. Est quis fugiat ullamco elit nulla consequat veniam nostrud id elit esse ad fugiat. Anim aute sit non elit ut pariatur Lorem. Aute do velit proident voluptate nisi. Fugiat culpa duis do eu sit incididunt adipisicing."
   }
 ]

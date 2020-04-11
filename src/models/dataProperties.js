@@ -1,4 +1,4 @@
-import { action } from "easy-peasy";
+import { action, thunk } from "easy-peasy";
 
 import data from "../constants/data.json";
 
@@ -18,6 +18,11 @@ const Properties = {
   },
   changeFilter: action((state, payload) => {
     state.filter = payload;
+  }),
+  getProperty: thunk((_, payload, helpers) => {
+    const { data } = helpers.getState();
+    const property = data.find((item) => item.id === payload);
+    return property;
   }),
 };
 

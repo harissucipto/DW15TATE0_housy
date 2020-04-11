@@ -9,7 +9,8 @@ const PropertyImage = ({ images = [] }) => {
       <div
         style={{
           ...styles.heroImage,
-          backgroundImage: `url("${heroImage}")`,
+          backgroundImage:
+            Boolean(heroImage) && `url("${require(`../images/${heroImage}`)}")`,
         }}
       />
       <Grid container>
@@ -31,7 +32,8 @@ const PropertyImage = ({ images = [] }) => {
             <div
               style={{
                 ...styles.restImages,
-                backgroundImage: `url("${image}")`,
+                backgroundImage:
+                  Boolean(image) && `url("${require(`../images/${image}`)}")`,
               }}
             >
               {restImages.length > 3 && index === 2 ? (
@@ -52,6 +54,7 @@ const styles = {
     width: "100%",
     height: "362px",
     backgroundColor: "grey",
+    backgroundSize: "cover",
     marginBottom: "7px",
   },
   restImages: {
@@ -62,7 +65,7 @@ const styles = {
   moreImages: {
     width: "100%",
     height: "168px",
-    backgroundColor: "rgba(0, 0, 0, 80%)",
+    backgroundColor: "rgba(0, 0, 0, 10%)",
     position: "absolute",
     color: "white",
     fontSize: "3rem",

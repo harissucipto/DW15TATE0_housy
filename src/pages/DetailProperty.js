@@ -1,72 +1,94 @@
-import React from "react";
-import { Grid } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { Grid, CircularProgress } from "@material-ui/core";
 import { SingleBed, Bathtub } from "@material-ui/icons";
 
 import PropertyImage from "../components/PropertyImage";
 import HeaderDetail from "../components/HeaderDetail";
 import BookNow from "../components/BookNow";
-
-const property = {
-  images: new Array(10).fill(1),
-  name: "House Astina",
-  price: 9000000,
-  bedrooms: 3,
-  bathrooms: 3,
-  area: 1800,
-  address:
-    "Jl. Elang IV Perum Permata Bintaro Residence, Pondok Aren,Tangerang Selatan",
-  description:
-    "Quis velit quis esse culpa ut esse tempor fugiat. Consequat dolore et qui ipsum voluptate. Pariatur enim aliqua consequat consectetur anim. Adipisicing quis qui laboris ipsum deserunt in anim duis nostrud Lorem esse incididunt. Reprehenderit minim id reprehenderit fugiat tempor amet deserunt ad laborum. Nisi anim culpa amet amet. Magna voluptate tempor labore sunt cupidatat fugiat deserunt in laborum sunt proident.",
-};
+import { useParams } from "react-router-dom";
+import { useStoreActions } from "easy-peasy";
 
 const DetailProperty = () => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+  const { getProperty } = useStoreActions(({ properties }) => properties);
+
+  useEffect(() => {
+    const data = getProperty(id);
+    setData(data);
+    setLoading(false);
+  }, [getProperty, id]);
+
   return (
     <div>
       <HeaderDetail />
-      <div style={styles.container}>
-        <PropertyImage images={property.images} />
-        <div style={styles.containerDetail}>
-          <h1>{property.name}</h1>
-          <Grid container>
-            <Grid item md={8}>
-              <h2>Rp. 9.000.000 / Year</h2>
-              <p>{property.address}</p>
-            </Grid>
-            <Grid item md={4}>
-              <Grid container>
-                <Grid item xs={4}>
-                  <p>Bedrooms</p>
-                  <div style={styles.feature}>
-                    <b style={styles.textFeature}>{property.bedrooms}</b>{" "}
-                    <SingleBed />
-                  </div>
-                </Grid>
-                <Grid item xs={4}>
-                  <p>Bathrooms</p>{" "}
-                  <div style={styles.feature}>
-                    <b style={styles.textFeature}>{property.bathrooms}</b>
-                    <Bathtub />
-                  </div>
-                </Grid>
-                <Grid item xs={4}>
-                  <p>Area</p>{" "}
-                  <div>
-                    <b style={styles.textFeature}>{property.area} </b>
-                    <b>ft</b>
-                  </div>
+      {loading && !Boolean(data) ? (
+        <div
+          style={{
+            display: "flex",
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            height: "50vh",
+          }}
+        >
+          <CircularProgress />
+        </div>
+      ) : null}
+
+      {Boolean(data) && !loading ? (
+        <div style={styles.container}>
+          <PropertyImage images={data.images} />
+          <div style={styles.containerDetail}>
+            <h1>{data.name}</h1>
+            <Grid container>
+              <Grid item md={8}>
+                <h2>
+                  Rp.{" "}
+                  {new Intl.NumberFormat("id-ID", {
+                    maximumSignificantDigits: 3,
+                  }).format(data.price)}{" "}
+                  / {data.typeOfRent}
+                </h2>
+                <p>{data.address}</p>
+              </Grid>
+              <Grid item md={4}>
+                <Grid container>
+                  <Grid item xs={4}>
+                    <p>Bedrooms</p>
+                    <div style={styles.feature}>
+                      <b style={styles.textFeature}>{data.bedrooms}</b>{" "}
+                      <SingleBed />
+                    </div>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <p>Bathrooms</p>{" "}
+                    <div style={styles.feature}>
+                      <b style={styles.textFeature}>{data.baths}</b>
+                      <Bathtub />
+                    </div>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <p>Area</p>{" "}
+                    <div>
+                      <b style={styles.textFeature}>{data.area} </b>
+                      <b>ft</b>
+                    </div>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
-          <div style={styles.description}>
-            <h3>Description</h3>
-            <p>{property.description}</p>
-          </div>
-          <div style={styles.action}>
-            <BookNow />
+            <div style={styles.description}>
+              <h3>Description</h3>
+              <p>{data.description}</p>
+            </div>
+            <div style={styles.action}>
+              <BookNow propertyID={id} />
+            </div>
           </div>
         </div>
-      </div>
+      ) : null}
     </div>
   );
 };

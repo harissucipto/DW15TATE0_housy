@@ -3,7 +3,6 @@ import { Card, CardContent } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
 // import SampleImage from "../images/sample-property.PNG";
-import { DETAIL_PROPERTY } from "../constants/routes";
 
 const PropertyItem = ({
   id,
@@ -17,8 +16,7 @@ const PropertyItem = ({
   address,
 }) => {
   const history = useHistory();
-  const handleNavigate = (id) => () =>
-    history.push(DETAIL_PROPERTY, { state: { id } });
+  const handleNavigate = (id) => () => history.push(`/detail-property/${id}`);
 
   const [image] = images;
 

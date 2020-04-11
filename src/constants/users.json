@@ -1,5 +1,6 @@
 [
   {
+    "id": "01",
     "fullName": "Haris Sucipto",
     "username": "harissucipto",
     "email": "harisssucipto@gmail.com",
@@ -10,6 +11,7 @@
     "address": "Buru Karimun"
   },
   {
+    "id": "02",
     "fullName": "pemilik",
     "username": "pemilik",
     "email": "harisssucipto@gmail.com",

@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import {
   HOME,
-  DETAIL_PROPERTY,
   ADD_PROPERTY,
   OWNER,
   PROFILE,
@@ -26,7 +25,7 @@ function App() {
         <Route path={MY_BOOKING} component={MyBooking} />
         <Route path={PROFILE} component={Profile} />
         <Route path={OWNER} component={HomeOwner} />
-        <Route path={DETAIL_PROPERTY} component={DetailProperty} />
+        <Route path="/detail-property/:id" component={DetailProperty} />
         <Route path={ADD_PROPERTY} component={AddProperty} />
         <Route path={HOME} component={Home} />
       </Switch>

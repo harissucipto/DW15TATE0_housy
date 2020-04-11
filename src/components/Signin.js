@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Dialog, Button, DialogContent, TextField } from "@material-ui/core";
-import { useStoreActions } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import { useHistory } from "react-router-dom";
 
 import { HOME, OWNER } from "../constants/routes";
 
 const Signin = () => {
-  const [open, setOpen] = useState(false);
+  const { open } = useStoreState(({ signin }) => signin);
+  const { setOpen } = useStoreActions(({ signin }) => signin);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 

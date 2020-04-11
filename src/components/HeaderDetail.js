@@ -20,6 +20,7 @@ const HeaderDetail = () => {
           justifyContent: "flex-end",
           flexWrap: "wrap",
           paddingLeft: "50px",
+          boxSizing: "border-box",
         }}
       >
         <Auth />
