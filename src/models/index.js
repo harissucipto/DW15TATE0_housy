@@ -7,7 +7,7 @@ import SigninModel from "./signin";
 
 const storeModel = {
   myBooking: persist(MyBookingModel),
-  properties: PropertiesModel,
+  properties: persist(PropertiesModel),
   users: persist(UsersModel),
   signup: SignupModel,
   signin: SigninModel,

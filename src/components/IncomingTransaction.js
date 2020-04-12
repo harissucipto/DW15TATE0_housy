@@ -49,7 +49,7 @@ const IncomingTransaction = () => {
     <div>
       {!loading && !Boolean(listData.length) ? (
         <div>
-          <h1>My Boking</h1>
+          <h1>Incoming Transaction</h1>
           <hr />
           <h3>Tidak ada data</h3>
         </div>
