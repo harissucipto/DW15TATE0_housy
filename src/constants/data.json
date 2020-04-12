@@ -1,6 +1,7 @@
 [
   {
     "id": "01",
+    "ownerId": "02",
     "images": [
       "p1.png",
       "p1extra1.png",
@@ -24,6 +25,7 @@
   },
   {
     "id": "02",
+    "ownerId": "02",
     "images": ["p2.png", "", "", "", "", "", "", "", ""],
     "name": "Rumah 2",
     "price": 13000000,
@@ -37,6 +39,7 @@
   },
   {
     "id": "03",
+    "ownerId": "02",
     "images": ["p3.png", "", ""],
     "name": "Rumah 3",
     "price": 80000,
@@ -50,6 +53,7 @@
   },
   {
     "id": "04",
+    "ownerId": "02",
     "images": ["p4.png", "", "", "", ""],
     "name": "Rumah 4",
     "price": 100000,
@@ -63,6 +67,7 @@
   },
   {
     "id": "05",
+    "ownerId": "02",
     "images": [""],
     "name": "Rumah 5",
     "price": 1022000,

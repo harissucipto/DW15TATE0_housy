@@ -48,10 +48,11 @@ const HistoryList = () => {
         </div>
       ) : null}
       {loading && <Loading />}
-      {!loading &&
-        listData.map((data) => (
-          <BookingItem key={data.id} {...data} userStatus={user.status} />
-        ))}
+      {!loading && Boolean(listData.length)
+        ? listData.map((data) => (
+            <BookingItem key={data.id} {...data} userStatus={user.status} />
+          ))
+        : null}
     </div>
   );
 };

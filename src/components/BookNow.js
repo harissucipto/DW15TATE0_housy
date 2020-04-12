@@ -39,7 +39,7 @@ const BookNow = ({ propertyID }) => {
       checkOut: checkOut,
       date: formatDate(new Date()),
       longTimeRent: "1 Year",
-      status: "cancel",
+      status: "waitingPayment",
     };
 
     const respOrder = addOrder(data);

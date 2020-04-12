@@ -18,6 +18,8 @@ const BookingItem = ({
   invoiceNumber,
   dateInvoice,
   userStatus,
+  id,
+  handleCloseDetailTrx,
 }) => {
   const isNotApprove = status !== "approve";
   const isOwner = userStatus === "owner";
@@ -113,9 +115,13 @@ const BookingItem = ({
           <Grid item md={8} />
           <Grid item md={4}>
             <Grid container>
-              {status === "cancel" && !isOwner ? <Pay /> : null}
-              {status !== "approve" && isOwner ? (
-                <ActionOwnerToTransaction />
+              {status === "waitingPayment" && !isOwner ? <Pay /> : null}
+              {["pending", "waitingPayment"].some((o) => o === status) &&
+              isOwner ? (
+                <ActionOwnerToTransaction
+                  trxId={id}
+                  handleCloseDetailTrx={handleCloseDetailTrx}
+                />
               ) : null}
             </Grid>
           </Grid>
