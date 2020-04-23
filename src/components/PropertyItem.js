@@ -6,12 +6,12 @@ import { useHistory } from "react-router-dom";
 
 const PropertyItem = ({
   id,
-  images,
+  images = [""],
   price,
-  typeOfRent,
-  amenities,
-  bedrooms,
-  baths,
+  typeRent,
+  ameneties,
+  bedRoom,
+  bathroom,
   area,
   address,
 }) => {
@@ -54,7 +54,7 @@ const PropertyItem = ({
             flexWrap: "wrap",
           }}
         >
-          {amenities.map((item) => (
+          {ameneties.map((item) => (
             <span
               style={{
                 backgroundColor: "white",
@@ -76,11 +76,11 @@ const PropertyItem = ({
           {new Intl.NumberFormat("id-ID", {
             maximumSignificantDigits: 3,
           }).format(price)}{" "}
-          / {typeOfRent}
+          / {typeRent}
         </h2>
         <h3>
           {" "}
-          {bedrooms} Beds, {baths} Baths, {area} sqft
+          {bedRoom} Beds, {bathroom} Baths, {area} sqft
         </h3>
         <p>{address}</p>
       </CardContent>

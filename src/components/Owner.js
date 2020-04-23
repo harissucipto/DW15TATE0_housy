@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Avatar, Menu, MenuItem } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { useStoreActions, useStoreState } from "easy-peasy";
+import { useSelector, useDispatch } from "react-redux";
 import {
   ExitToApp,
   PermIdentity,
@@ -10,6 +10,7 @@ import {
 } from "@material-ui/icons";
 
 import { PROFILE, ADD_PROPERTY, MY_HISTORY, HOME } from "../constants/routes";
+import { getUser, userLogout } from "../store/auth";
 
 const Owner = () => {
   const [anchorEl, setAncorEl] = useState(null);
@@ -19,16 +20,16 @@ const Owner = () => {
   const history = useHistory();
   const handleNavigate = (path) => () => history.push(path);
 
-  const { user } = useStoreState(({ users }) => users);
+  const user = useSelector(getUser);
   const titleAvatar = user.fullName
     .split(" ")
     .map((item) => item.slice(0, 1))
     .join("")
     .toUpperCase();
 
-  const { onLogout } = useStoreActions(({ users }) => users);
+  const dispatch = useDispatch();
   const handleLogout = () => {
-    onLogout();
+    dispatch(userLogout);
     history.push(HOME);
   };
 

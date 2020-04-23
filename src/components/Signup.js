@@ -6,10 +6,11 @@ import {
   TextField,
   MenuItem,
 } from "@material-ui/core";
-import { useStoreState, useStoreActions } from "easy-peasy";
 import { useHistory } from "react-router-dom";
 
 import { HOME, OWNER } from "../constants/routes";
+import { useSelector, useDispatch } from "react-redux";
+import { getSignupIsOpen, signupOpen, signupClose } from "../store/signup";
 
 const genders = [
   {
@@ -34,10 +35,10 @@ const listAses = [
 ];
 
 const Signup = () => {
-  const { open } = useStoreState(({ signup }) => signup);
-  const { setOpen } = useStoreActions(({ signup }) => signup);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const open = useSelector(getSignupIsOpen);
+  const dispatch = useDispatch();
+  const handleOpen = () => dispatch(signupOpen);
+  const handleClose = () => dispatch(signupClose);
 
   const [fullName, setFullName] = useState("");
   const [username, setUsername] = useState("");
@@ -51,7 +52,7 @@ const Signup = () => {
   const saveValue = (setState) => (evt) => setState(evt.target.value);
   const isEveryValueFil = (obj) =>
     Object.values(obj).every((item) => Boolean(item));
-  const { onSignup } = useStoreActions(({ users }) => users);
+  const { onSignup } = (u) => u;
   const history = useHistory();
 
   const handleSignup = () => {
@@ -70,21 +71,21 @@ const Signup = () => {
       return "";
     }
 
-    const user = onSignup(newUser);
-    if (!Boolean(user)) {
-      console.log("data bermasalah");
-      return;
-    }
+    // const user = onSignup(newUser);
+    // if (!Boolean(user)) {
+    //   console.log("data bermasalah");
+    //   return;
+    // }
 
-    if (status === "tenant") {
-      setOpen(false);
-      history.push(HOME);
-    }
+    // if (status === "tenant") {
+    //   setOpen(false);
+    //   history.push(HOME);
+    // }
 
-    if (status === "owner") {
-      setOpen(false);
-      history.push(OWNER);
-    }
+    // if (status === "owner") {
+    //   setOpen(false);
+    //   history.push(OWNER);
+    // }
   };
 
   return (

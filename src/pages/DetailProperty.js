@@ -6,24 +6,23 @@ import PropertyImage from "../components/PropertyImage";
 import HeaderDetail from "../components/HeaderDetail";
 import BookNow from "../components/BookNow";
 import { useParams } from "react-router-dom";
-import { useStoreActions } from "easy-peasy";
+import { useSelector, useDispatch } from "react-redux";
+import { getHouseById, getHouses, loadHouseById } from "../store/houses";
 
 const DetailProperty = () => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  const { getProperty } = useStoreActions(({ properties }) => properties);
+  const house = useSelector(getHouseById(id));
+  const { loading } = useSelector(getHouses);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const data = getProperty(id);
-    setData(data);
-    setLoading(false);
-  }, [getProperty, id]);
+    dispatch(loadHouseById(id));
+  }, [dispatch, id]);
 
   return (
     <div>
       <HeaderDetail />
-      {loading && !Boolean(data) ? (
+      {loading && (
         <div
           style={{
             display: "flex",
@@ -35,44 +34,45 @@ const DetailProperty = () => {
         >
           <CircularProgress />
         </div>
-      ) : null}
+      )}
+      {!loading && !house && <h3>Tidak Ada Rumah</h3>}
 
-      {Boolean(data) && !loading ? (
+      {!loading && house && (
         <div style={styles.container}>
-          <PropertyImage images={data.images} />
+          <PropertyImage images={house.images} />
           <div style={styles.containerDetail}>
-            <h1>{data.name}</h1>
+            <h1>{house.name}</h1>
             <Grid container>
               <Grid item md={8}>
                 <h2>
                   Rp.{" "}
                   {new Intl.NumberFormat("id-ID", {
                     maximumSignificantDigits: 3,
-                  }).format(data.price)}{" "}
-                  / {data.typeOfRent}
+                  }).format(house.price)}{" "}
+                  / {house.typeRent}
                 </h2>
-                <p>{data.address}</p>
+                <p>{house.address}</p>
               </Grid>
               <Grid item md={4}>
                 <Grid container>
                   <Grid item xs={4}>
                     <p>Bedrooms</p>
                     <div style={styles.feature}>
-                      <b style={styles.textFeature}>{data.bedrooms}</b>{" "}
+                      <b style={styles.textFeature}>{house.bedRoom}</b>{" "}
                       <SingleBed />
                     </div>
                   </Grid>
                   <Grid item xs={4}>
                     <p>Bathrooms</p>{" "}
                     <div style={styles.feature}>
-                      <b style={styles.textFeature}>{data.baths}</b>
+                      <b style={styles.textFeature}>{house.bathroom}</b>
                       <Bathtub />
                     </div>
                   </Grid>
                   <Grid item xs={4}>
                     <p>Area</p>{" "}
                     <div>
-                      <b style={styles.textFeature}>{data.area} </b>
+                      <b style={styles.textFeature}>{house.area} </b>
                       <b>ft</b>
                     </div>
                   </Grid>
@@ -81,14 +81,16 @@ const DetailProperty = () => {
             </Grid>
             <div style={styles.description}>
               <h3>Description</h3>
-              <p>{data.description}</p>
+              <p>{description}</p>
             </div>
             <div style={styles.action}>
-              <BookNow propertyID={id} />
+              {/*
+                <BookNow propertyID={id} />
+                */}
             </div>
           </div>
         </div>
-      ) : null}
+      )}
     </div>
   );
 };
@@ -117,5 +119,8 @@ const styles = {
     paddingRight: "5px",
   },
 };
+
+const description =
+  "Voluptate deserunt adipisicing commodo sunt consectetur officia cillum enim velit ullamco consectetur ad cupidatat laborum. Magna quis ipsum nostrud exercitation excepteur sit dolor excepteur excepteur ullamco laboris id esse qui. Veniam incididunt et ea sit nulla dolore ipsum fugiat qui laborum. Dolor elit reprehenderit aliquip velit ullamco magna et minim voluptate minim dolore. Proident adipisicing non laboris incididunt.";
 
 export default DetailProperty;

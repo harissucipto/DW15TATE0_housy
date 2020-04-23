@@ -74,6 +74,7 @@ const PropertyRoom = ({
         <p>Bedroom</p>
         {listBedroom.map(({ label, value }) => (
           <Button
+            disabled
             key={value}
             variant="contained"
             style={{ marginRight: "25px" }}
@@ -89,6 +90,7 @@ const PropertyRoom = ({
         <p>Bathroom</p>
         {listBathroom.map(({ label, value }) => (
           <Button
+            disabled
             key={value}
             variant="contained"
             onClick={handleChangeBaths(value)}

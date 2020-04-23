@@ -39,6 +39,7 @@ const Amneties = ({ data, onChecked }) => {
         >
           <p>{label} </p>
           <Checkbox
+            disabled
             color="primary"
             onChange={handleChange(value)}
             checked={data[value]}

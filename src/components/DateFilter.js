@@ -7,6 +7,7 @@ const DateFilter = () => {
     <div>
       <h3>Date</h3>
       <TextField
+        disabled
         variant="filled"
         type="date"
         fullWidth

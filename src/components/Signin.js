@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import { Dialog, Button, DialogContent, TextField } from "@material-ui/core";
-import { useStoreActions, useStoreState } from "easy-peasy";
 import { useHistory } from "react-router-dom";
 
 import { HOME, OWNER } from "../constants/routes";
+import { useSelector, useDispatch } from "react-redux";
+import { getSigninIsOpen, signinOpen, signinClose } from "../store/signin";
+import { signupOpen } from "../store/signup";
 
 const Signin = () => {
-  const { open } = useStoreState(({ signin }) => signin);
-  const { setOpen } = useStoreActions(({ signin }) => signin);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const open = useSelector(getSigninIsOpen);
+  const dispatch = useDispatch();
+  const handleOpen = () => dispatch(signinOpen);
+  const handleClose = () => dispatch(signinClose);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { onLogin } = useStoreActions(({ users }) => users);
+  const onLogin = (u) => u;
 
   const history = useHistory();
   const handleUsername = (evt) => setUsername(evt.target.value);
@@ -32,10 +34,9 @@ const Signin = () => {
     }
   };
 
-  const { setOpen: setOpenSignup } = useStoreActions(({ signup }) => signup);
   const handleOpenSignupModal = () => {
-    setOpen(false);
-    setOpenSignup(true);
+    dispatch(signinClose);
+    dispatch(signupOpen);
   };
 
   return (

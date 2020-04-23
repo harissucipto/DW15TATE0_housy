@@ -1,15 +1,15 @@
 import React from "react";
-import { useStoreState } from "easy-peasy";
+import { useSelector } from "react-redux";
 
+import { checkIsLogin, checkIsTenant } from "../store/auth";
 import Signin from "./Signin";
 import Signup from "./Signup";
 import User from "./User";
 import Owner from "./Owner";
 
 const Auth = () => {
-  const { user } = useStoreState(({ users }) => users);
-  const isLogin = Boolean(user);
-  const isTenant = user ? user.status === "tenant" : "";
+  const isLogin = useSelector(checkIsLogin);
+  const isTenant = useSelector(checkIsTenant);
 
   return (
     <div>

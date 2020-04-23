@@ -1,32 +1,41 @@
 import React, { useState } from "react";
 import { Button } from "@material-ui/core";
-import { useStoreActions, useStoreState } from "easy-peasy";
+import { useSelector, useDispatch } from "react-redux";
 
+import { getFilterHouses, filterHousesChange } from "../store/filterHouses";
 import TypeOfRent from "./TypeOfRent";
 import DateFilter from "./DateFilter";
 import PropertyRoom from "./PropertyRoom";
 import Amneties from "./Amneties";
 import Budget from "./Budget";
+import { loadHouses } from "../store/houses";
 
 const Filter = () => {
-  const { filter: dataFilter } = useStoreState(({ properties }) => properties);
+  const dataFilter = useSelector(getFilterHouses);
   const [filter, setDataFilter] = useState({
     ...dataFilter,
   });
-  const handleChangeFilter = (prop) => (value) =>
+  const [buttonColorActive, setButtonColorActive] = useState(true);
+
+  const dispatch = useDispatch();
+  const handleChangeFilter = (prop) => (value) => {
     setDataFilter({
       ...filter,
       [prop]: value,
     });
-
-  const { changeFilter } = useStoreActions(({ properties }) => properties);
-  const handleFilter = () => changeFilter(filter);
+    setButtonColorActive(false);
+  };
+  const handleFilter = () => {
+    dispatch(filterHousesChange(filter));
+    dispatch(loadHouses);
+    setButtonColorActive(true);
+  };
 
   return (
     <div style={{ width: "460px", paddingTop: "40px", paddingLeft: "50px" }}>
       <TypeOfRent
-        selected={filter.typeOfRent}
-        onSelected={handleChangeFilter("typeOfRent")}
+        selected={filter.typeRent}
+        onSelected={handleChangeFilter("typeRent")}
       />
       <DateFilter />
       <PropertyRoom
@@ -41,7 +50,11 @@ const Filter = () => {
       />
       <Budget value={filter.budget} onChange={handleChangeFilter("budget")} />
       <div style={{ textAlign: "right", marginTop: "40px" }}>
-        <Button variant="contained" color="primary" onClick={handleFilter}>
+        <Button
+          variant="contained"
+          color={buttonColorActive ? "primary" : "default"}
+          onClick={handleFilter}
+        >
           APPLY
         </Button>
       </div>
