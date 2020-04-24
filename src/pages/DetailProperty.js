@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Grid, CircularProgress } from "@material-ui/core";
 import { SingleBed, Bathtub } from "@material-ui/icons";
 

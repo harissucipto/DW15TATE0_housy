@@ -6,6 +6,8 @@ import { HOME, OWNER } from "../constants/routes";
 import { useSelector, useDispatch } from "react-redux";
 import { getSigninIsOpen, signinOpen, signinClose } from "../store/signin";
 import { signupOpen } from "../store/signup";
+import Loading from "./Loading";
+import { userLogin, getAuth, userLoginReceived } from "../store/auth";
 
 const Signin = () => {
   const open = useSelector(getSigninIsOpen);
@@ -15,20 +17,20 @@ const Signin = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const onLogin = (u) => u;
 
   const history = useHistory();
   const handleUsername = (evt) => setUsername(evt.target.value);
   const handlePassword = (evt) => setPassword(evt.target.value);
-  const handleLogin = () => {
-    const user = onLogin({ username, password });
-    if (Boolean(user)) {
-      const { status } = user;
+  const handleLogin = async () => {
+    const data = { username, password };
+    const { type, payload } = await dispatch(userLogin(data));
+    if (type === userLoginReceived.type) {
+      const { role } = payload;
       handleClose();
-      if (status === "tenant") {
+      if (role === "tenant") {
         history.push(HOME);
       }
-      if (status === "owner") {
+      if (role === "owner") {
         history.push(OWNER);
       }
     }
@@ -38,6 +40,8 @@ const Signin = () => {
     dispatch(signinClose);
     dispatch(signupOpen);
   };
+
+  const { loading, message } = useSelector(getAuth);
 
   return (
     <>
@@ -60,29 +64,34 @@ const Signin = () => {
           >
             Sign in
           </h1>
-          <div>
-            <h2>Username</h2>
-            <TextField
-              value={username}
-              variant="filled"
-              fullWidth
-              onChange={handleUsername}
-            />
-            <h2>Password</h2>
-            <TextField
-              value={password}
-              variant="filled"
-              fullWidth
-              type="password"
-              onChange={handlePassword}
-            />
-          </div>
+          <p>{message}</p>
+          {loading && <Loading />}
+          {!loading && (
+            <div>
+              <h2>Username</h2>
+              <TextField
+                value={username}
+                variant="filled"
+                fullWidth
+                onChange={handleUsername}
+              />
+              <h2>Password</h2>
+              <TextField
+                value={password}
+                variant="filled"
+                fullWidth
+                type="password"
+                onChange={handlePassword}
+              />
+            </div>
+          )}
           <div
             style={{
               marginTop: "35px",
             }}
           >
             <Button
+              disabled={loading}
               color="primary"
               variant="contained"
               fullWidth

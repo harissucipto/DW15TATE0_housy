@@ -21,11 +21,14 @@ const Owner = () => {
   const handleNavigate = (path) => () => history.push(path);
 
   const user = useSelector(getUser);
-  const titleAvatar = user.fullName
-    .split(" ")
-    .map((item) => item.slice(0, 1))
-    .join("")
-    .toUpperCase();
+  const titleAvatar =
+    user &&
+    user.fullName &&
+    user.fullName
+      .split(" ")
+      .map((item) => item.slice(0, 1))
+      .join("")
+      .toUpperCase();
 
   const dispatch = useDispatch();
   const handleLogout = () => {

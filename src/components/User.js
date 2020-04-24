@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Avatar, Menu, MenuItem } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { useStoreState, useStoreActions } from "easy-peasy";
 import {
   ExitToApp,
   PermIdentity,
@@ -10,6 +9,8 @@ import {
 } from "@material-ui/icons";
 
 import { PROFILE, MY_BOOKING, MY_HISTORY, HOME } from "../constants/routes";
+import { useSelector, useDispatch } from "react-redux";
+import { getUser, userLogout, getInfoUserLogin } from "../store/auth";
 
 const User = () => {
   const [anchorEl, setAncorEl] = useState(null);
@@ -19,18 +20,23 @@ const User = () => {
   const history = useHistory();
   const handleNavigate = (path) => () => history.push(path);
 
-  const { user } = useStoreState(({ users }) => users);
-  const titleAvatar = user.fullName
-    .split(" ")
-    .map((item) => item.slice(0, 1))
-    .join("")
-    .toUpperCase();
+  const user = useSelector(getUser);
+  const titleAvatar =
+    user.fullName
+      ?.split(" ")
+      .map((item) => item.slice(0, 1))
+      .join("")
+      .toUpperCase() || "U";
 
-  const { onLogout } = useStoreActions(({ users }) => users);
+  const dispatch = useDispatch();
   const handleLogout = () => {
-    onLogout();
+    dispatch(userLogout);
     history.push(HOME);
   };
+
+  useEffect(() => {
+    dispatch(getInfoUserLogin);
+  }, [dispatch]);
 
   return (
     <>
