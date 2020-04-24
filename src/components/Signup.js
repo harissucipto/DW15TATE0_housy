@@ -39,7 +39,9 @@ const listAses = [
 const Signup = () => {
   const open = useSelector(getSignupIsOpen);
   const dispatch = useDispatch();
-  const handleOpen = () => dispatch(signupOpen);
+  const handleOpen = () => {
+    dispatch(signupOpen);
+  };
   const handleClose = () => dispatch(signupClose);
 
   const [fullName, setFullName] = useState("");

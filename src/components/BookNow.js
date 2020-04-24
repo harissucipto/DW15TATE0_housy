@@ -5,13 +5,14 @@ import { useHistory } from "react-router-dom";
 
 import { MY_BOOKING } from "../constants/routes";
 import { useSelector, useDispatch } from "react-redux";
-import { checkIsLogin } from "../store/auth";
+import { checkIsLogin, getUser } from "../store/auth";
 import { signinOpen } from "../store/signin";
 
 const BookNow = ({ propertyID }) => {
   const [open, setOpen] = useState(false);
 
   const isLogin = useSelector(checkIsLogin);
+  const user = useSelector(getUser);
   const dispatch = useDispatch();
 
   const handleOpen = () => {
@@ -55,6 +56,7 @@ const BookNow = ({ propertyID }) => {
     console.log("gagal");
   };
 
+  if (user && user.role !== "tenant") return null;
   return (
     <>
       <Button

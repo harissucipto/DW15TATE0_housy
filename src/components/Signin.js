@@ -7,12 +7,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { getSigninIsOpen, signinOpen, signinClose } from "../store/signin";
 import { signupOpen } from "../store/signup";
 import Loading from "./Loading";
-import { userLogin, getAuth, userLoginReceived } from "../store/auth";
+import {
+  userLogin,
+  getAuth,
+  userLoginReceived,
+  clearMessage,
+} from "../store/auth";
 
 const Signin = () => {
   const open = useSelector(getSigninIsOpen);
   const dispatch = useDispatch();
-  const handleOpen = () => dispatch(signinOpen);
+  const handleOpen = () => {
+    dispatch(clearMessage);
+    dispatch(signinOpen);
+  };
   const handleClose = () => dispatch(signinClose);
 
   const [username, setUsername] = useState("");

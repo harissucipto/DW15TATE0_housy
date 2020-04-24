@@ -59,6 +59,9 @@ const slice = createSlice({
       auth.loading = false;
       auth.message = action.payload;
     },
+    authClearMessage: (auth, action) => {
+      auth.message = "";
+    },
   },
 });
 
@@ -75,6 +78,7 @@ export const {
   userRegisterRequested,
   userRegisterReceived,
   userRegisterRequestFailed,
+  authClearMessage,
 } = slice.actions;
 
 // Action Creator
@@ -120,6 +124,9 @@ export const userRegister = (user) => (dispatch) =>
       onError: userRegisterRequestFailed.type,
     })
   );
+
+export const clearMessage = (dispatch) =>
+  dispatch({ type: authClearMessage.type });
 
 // Selector
 export const checkIsLogin = createSelector(
