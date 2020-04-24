@@ -1,56 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import BookingItem from "./BookingItem";
-import { useStoreState, useStoreActions } from "easy-peasy";
 import Loading from "./Loading";
-
-// const dataBookings = [
-//   {
-//     id: "ad2r23",
-//     property: {
-//       name: "House Astina",
-//       address:
-//         "Jl. Elang IV Perum Permata Bintaro Residence, Pondok Aren,Tangerang Selatan",
-//       amenities: ["Furnished"],
-//       typeOfRent: "Year",
-//     },
-//     checkIn: "30 March 2020",
-//     checkOut: "31 March 2021",
-//     date: "Saturday, 30 March 2020",
-//     longTimeRent: "1 Year",
-//     status: "approve",
-//     invoiceImage: "sks",
-//     invoiceNumber: "TCK010",
-//     dateInvoice: "Sunday, 31 March 2020",
-//   },
-// ];
+import { useSelector, useDispatch } from "react-redux";
+import { getOrders, loadOrders } from "../store/orders";
+import { checkIsLogin, getUser } from "../store/auth";
+import { Redirect } from "react-router-dom";
+import { HOME } from "../constants/routes";
 
 const HistoryList = () => {
-  const [loading, setLoading] = useState(true);
-  const [listData, setData] = useState([]);
-  const { getMyHistory } = useStoreActions(({ myBooking }) => myBooking);
-  const { user } = useStoreState(({ users }) => users);
+  const { list, loading, message } = useSelector(getOrders);
+  const dispatch = useDispatch();
+  const isLogin = useSelector(checkIsLogin);
+  const { role } = useSelector(getUser);
 
   useEffect(() => {
-    if (user && user.id) {
-      const respon = getMyHistory(user.id);
-      setData(respon);
-      setLoading(false);
+    if (isLogin) {
+      dispatch(loadOrders("history"));
     }
-  }, [user, getMyHistory]);
+  }, [dispatch, isLogin]);
+
+  if (!isLogin) return <Redirect to={HOME} />;
 
   return (
     <div>
-      {!loading && !Boolean(listData.length) ? (
+      {!loading && !Boolean(list.length) ? (
         <div>
           <h1>My History</h1>
           <hr />
-          <h3>Tidak ada data</h3>
+          {message ? <h3>{message}</h3> : <h3>Tidak ada data</h3>}
         </div>
       ) : null}
       {loading && <Loading />}
-      {!loading && Boolean(listData.length)
-        ? listData.map((data) => (
-            <BookingItem key={data.id} {...data} userStatus={user.status} />
+      {!loading && Boolean(list.length)
+        ? list.map((data) => (
+            <BookingItem key={data.id} {...data} userStatus={role} />
           ))
         : null}
     </div>

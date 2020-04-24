@@ -3,14 +3,16 @@ import { createSlice, createSelector } from "@reduxjs/toolkit";
 import { apiCallBegan } from "./api";
 import { getAuth, getConfigHeader } from "./auth";
 
+const initialState = {
+  list: [],
+  loading: false,
+  lastFetch: null,
+  message: "",
+};
+
 const slice = createSlice({
   name: "orders",
-  initialState: {
-    list: [],
-    loading: false,
-    lastFetch: null,
-    message: "",
-  },
+  initialState,
   reducers: {
     ordersRequested: (orders) => {
       orders.loading = true;

@@ -1,40 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import BookingItem from "./BookingItem";
-import { useStoreState, useStoreActions } from "easy-peasy";
 import Loading from "./Loading";
+import { useSelector, useDispatch } from "react-redux";
+import { getOrders, loadOrders } from "../store/orders";
+import { checkIsLogin, getUser } from "../store/auth";
 import { Redirect } from "react-router-dom";
-
 import { HOME } from "../constants/routes";
 
 const BookingList = () => {
-  const [loading, setLoading] = useState(true);
-  const [listData, setData] = useState([]);
-  const { getMyBooking } = useStoreActions(({ myBooking }) => myBooking);
-  const { user } = useStoreState(({ users }) => users);
+  const { list, loading, message } = useSelector(getOrders);
+  const dispatch = useDispatch();
+  const isLogin = useSelector(checkIsLogin);
+  const { role } = useSelector(getUser);
 
   useEffect(() => {
-    if (user && user.id) {
-      const respon = getMyBooking(user.id);
-      setData(respon);
-      setLoading(false);
+    if (isLogin) {
+      dispatch(loadOrders("booking"));
     }
-  }, [user, getMyBooking]);
+  }, [dispatch, isLogin]);
 
-  if (!Boolean(user)) return <Redirect to={HOME} />;
+  if (!isLogin) return <Redirect to={HOME} />;
 
   return (
     <div>
-      {!loading && !Boolean(listData.length) ? (
+      {!loading && !Boolean(list.length) ? (
         <div>
           <h1>My Boking</h1>
           <hr />
-          <h3>Tidak ada data</h3>
+          message ? <h3>{message}</h3> : <h3>Tidak ada data</h3>}
         </div>
       ) : null}
       {loading && <Loading />}
       {!loading &&
-        listData.map((data) => (
-          <BookingItem key={data.id} {...data} userStatus={user.status} />
+        list.map((data) => (
+          <BookingItem key={data.id} {...data} userStatus={role} />
         ))}
     </div>
   );

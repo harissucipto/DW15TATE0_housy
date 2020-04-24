@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { Grid, CircularProgress } from "@material-ui/core";
 import { SingleBed, Bathtub } from "@material-ui/icons";
-
-import PropertyImage from "../components/PropertyImage";
-import HeaderDetail from "../components/HeaderDetail";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+
 import { getHouseById, getHouses, loadHouseById } from "../store/houses";
+import PropertyImage from "../components/PropertyImage";
+import HeaderDetail from "../components/HeaderDetail";
+import BookNow from "../components/BookNow";
 
 const DetailProperty = () => {
   const { id } = useParams();
@@ -38,7 +39,7 @@ const DetailProperty = () => {
 
       {!loading && house && (
         <div style={styles.container}>
-          <PropertyImage images={house.images} />
+          <PropertyImage images={new Array(7).fill("")} />
           <div style={styles.containerDetail}>
             <h1>{house.name}</h1>
             <Grid container>
@@ -83,9 +84,7 @@ const DetailProperty = () => {
               <p>{description}</p>
             </div>
             <div style={styles.action}>
-              {/*
-                <BookNow propertyID={id} />
-                */}
+              <BookNow propertyID={id} />
             </div>
           </div>
         </div>

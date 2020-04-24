@@ -1,25 +1,26 @@
 import React, { useState } from "react";
 import { Button, Dialog, DialogContent, TextField } from "@material-ui/core";
-import { useStoreActions, useStoreState } from "easy-peasy";
 import { format } from "date-fns";
 import { useHistory } from "react-router-dom";
 
 import { MY_BOOKING } from "../constants/routes";
+import { useSelector, useDispatch } from "react-redux";
+import { checkIsLogin } from "../store/auth";
+import { signinOpen } from "../store/signin";
 
 const BookNow = ({ propertyID }) => {
-  const { setOpen: setOpenSignin } = useStoreActions(({ signin }) => signin);
-  const handleOpenSigninModal = () => setOpenSignin(true);
-  const { user } = useStoreState(({ users }) => users);
   const [open, setOpen] = useState(false);
 
+  const isLogin = useSelector(checkIsLogin);
+  const dispatch = useDispatch();
+
   const handleOpen = () => {
-    if (Boolean(user)) {
+    if (isLogin) {
       setOpen(true);
+      return;
     }
 
-    if (!Boolean(user)) {
-      handleOpenSigninModal();
-    }
+    dispatch(signinOpen);
   };
   const handleClose = () => setOpen(false);
 
@@ -31,7 +32,7 @@ const BookNow = ({ propertyID }) => {
   };
 
   const history = useHistory();
-  const { addOrder } = useStoreActions(({ myBooking }) => myBooking);
+  const addOrder = (f) => f;
   const handleBooking = () => {
     const data = {
       propertyID,
