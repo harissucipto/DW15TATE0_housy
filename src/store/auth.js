@@ -83,7 +83,7 @@ export const getInfoUserLogin = (dispatch, getState) => {
     apiCallBegan({
       url: "/profile",
       method: "get",
-      ...getConfig(token),
+      ...getConfigHeader(token),
       onStart: userInfoRequested.type,
       onSuccess: userInfoReceived.type,
       onError: userInfoRequestFailed.type,
@@ -112,7 +112,7 @@ export const getUserRole = (state) => state.auth?.user?.role;
 
 export const getAuth = (state) => state.auth;
 
-const getConfig = (token) => {
+export const getConfigHeader = (token) => {
   if (!token) return {};
   return {
     headers: { Authorization: `Bearer ${token}` },

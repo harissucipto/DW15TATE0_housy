@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   TableContainer,
   Paper,
@@ -8,11 +9,12 @@ import {
   Table,
   TableBody,
 } from "@material-ui/core";
-import { useStoreState, useStoreActions } from "easy-peasy";
-import Loading from "./Loading";
 import { Redirect } from "react-router-dom";
 
 import { HOME } from "../constants/routes";
+import { getOrders, loadOrders } from "../store/orders";
+import { checkIsOwner } from "../store/auth";
+import Loading from "./Loading";
 import DetailTrx from "./DetailTrx";
 
 const colorStatus = {
@@ -27,27 +29,21 @@ const statusTrx = {
 };
 
 const IncomingTransaction = () => {
-  const [loading, setLoading] = useState(true);
-  const [listData, setData] = useState([]);
-  const { getMyIncomingTransaction } = useStoreActions(
-    ({ myBooking }) => myBooking
-  );
-  const { user } = useStoreState(({ users }) => users);
-  const { data } = useStoreState(({ myBooking }) => myBooking);
+  const { list, loading, message } = useSelector(getOrders);
+  const dispatch = useDispatch();
+  const isOwner = useSelector(checkIsOwner);
 
   useEffect(() => {
-    if (user && user.id) {
-      const respon = getMyIncomingTransaction(user.id);
-      setData(respon);
-      setLoading(false);
+    if (isOwner) {
+      dispatch(loadOrders());
     }
-  }, [user, getMyIncomingTransaction, data]);
+  }, [dispatch, isOwner]);
 
-  if (!Boolean(user)) return <Redirect to={HOME} />;
+  if (!isOwner) return <Redirect to={HOME} />;
 
   return (
     <div>
-      {!loading && !Boolean(listData.length) ? (
+      {!loading && !list.length ? (
         <div>
           <h1>Incoming Transaction</h1>
           <hr />
@@ -56,7 +52,9 @@ const IncomingTransaction = () => {
       ) : null}
       {loading && <Loading />}
 
-      {!loading && Boolean(listData.length) ? (
+      {message && <h3>{message}</h3>}
+
+      {!loading && list.length ? (
         <>
           <h1>Incoming Transaction</h1>
           <TableContainer component={Paper}>
@@ -72,17 +70,17 @@ const IncomingTransaction = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {listData.map((trx, index) => (
+                {list.map((trx, index) => (
                   <TableRow key={trx.id}>
                     <TableCell style={styles.content}>{index + 1}</TableCell>
                     <TableCell style={styles.content}>
-                      {trx?.tenant.fullName}
+                      {trx?.User?.username}
                     </TableCell>
                     <TableCell style={styles.content}>
-                      {trx?.property?.typeOfRent}
+                      {trx?.House?.typeRent}
                     </TableCell>
                     <TableCell style={styles.content}>
-                      {trx?.invoice?.buktiTransfer || "-"}
+                      {trx?.attachment || "-"}
                     </TableCell>
                     <TableCell
                       style={{
@@ -93,11 +91,12 @@ const IncomingTransaction = () => {
                       {statusTrx[trx?.status] || trx?.status}
                     </TableCell>
                     <TableCell>
-                      <DetailTrx
-                        data={trx}
-                        userStatus={user?.status}
-                        id={trx.id}
-                      />
+                      {/* <DetailTrx
+                         data={trx}
+                          userStatus={user?.status}
+                          id={trx.id}
+                         />
+                        */}
                     </TableCell>
                   </TableRow>
                 ))}

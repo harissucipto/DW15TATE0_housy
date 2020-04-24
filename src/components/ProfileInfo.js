@@ -49,7 +49,7 @@ const TextInfo = ({ title, value, Icon, onClick, firstUpperCase = true }) => (
 const ProfileInfo = ({
   fullName = "",
   email = "",
-  status = "",
+  ListA = "",
   gender = "",
   phone = "",
   address = "",
@@ -75,7 +75,7 @@ const ProfileInfo = ({
           Icon={Lock}
           onClick={handleOpenChangePassword}
         />
-        <TextInfo title="Status" value={status} Icon={House} />
+        <TextInfo title="Status" value={ListA?.name} Icon={House} />
         <TextInfo title="Gender" value={gender} Icon={Wc} />
         <TextInfo title="Mobile Phone" value={phone} Icon={Phone} />
         <TextInfo title="Address" value={address} Icon={Room} />

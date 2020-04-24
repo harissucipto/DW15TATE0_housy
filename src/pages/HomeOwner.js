@@ -1,14 +1,15 @@
 import React from "react";
-import { useStoreState } from "easy-peasy";
 import { Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { HOME } from "../constants/routes";
 import HeaderDetail from "../components/HeaderDetail";
 import IncomingTransaction from "../components/IncomingTransaction";
+import { checkIsOwner } from "../store/auth";
 
 const HomeOwner = () => {
-  const { user } = useStoreState(({ users }) => users);
-  if (!Boolean(user)) return <Redirect to={HOME} />;
+  const isOwner = useSelector(checkIsOwner);
+  if (!isOwner) return <Redirect to={HOME} />;
 
   return (
     <div>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useStoreState, useStoreActions } from "easy-peasy";
 import { Dialog, Button, DialogContent, TextField } from "@material-ui/core";
 
 const ChangePassword = ({ open, handleClose }) => {

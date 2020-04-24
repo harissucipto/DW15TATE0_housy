@@ -7,11 +7,18 @@ import ProfileInfo from "../components/ProfileInfo";
 import ProfileImage from "../components/ProfileImage";
 import { Redirect } from "react-router-dom";
 import { HOME } from "../constants/routes";
-import { checkIsLogin, getUser, getInfoUserLogin } from "../store/auth";
+import {
+  checkIsLogin,
+  getUser,
+  getInfoUserLogin,
+  getAuth,
+} from "../store/auth";
+import Loading from "../components/Loading";
 
 const Profile = () => {
   const isLogin = useSelector(checkIsLogin);
   const user = useSelector(getUser);
+  const { loading } = useSelector(getAuth);
 
   const dispatch = useDispatch();
 
@@ -27,20 +34,24 @@ const Profile = () => {
   return (
     <div>
       <HeaderDetail />
-      <div style={styles.container}>
-        <Card variant="outlined" style={styles.profile}>
-          <CardContent>
-            <Grid container>
-              <Grid item md={7}>
-                <ProfileInfo {...user} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <div style={styles.container}>
+          <Card variant="outlined" style={styles.profile}>
+            <CardContent>
+              <Grid container>
+                <Grid item md={7}>
+                  <ProfileInfo {...user} />
+                </Grid>
+                <Grid item md={5}>
+                  <ProfileImage image={""} status={user.status} />
+                </Grid>
               </Grid>
-              <Grid item md={5}>
-                <ProfileImage image={""} status={user.status} />
-              </Grid>
-            </Grid>
-          </CardContent>
-        </Card>
-      </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 };
