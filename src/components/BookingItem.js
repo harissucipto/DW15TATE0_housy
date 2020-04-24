@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardContent, Grid } from "@material-ui/core";
 import { RadioButtonUnchecked, RadioButtonChecked } from "@material-ui/icons";
+import { format } from "date-fns";
 
 import Logo from "../images/logo.PNG";
 import BookingCustomer from "./BookingCustomer";
@@ -8,11 +9,14 @@ import Pay from "./Pay";
 import StatusPayment from "./StatusPayment";
 import ActionOwnerToTransaction from "./ActionOwnerToTransaction";
 
+const stringDate = (dateString) => format(new Date(dateString), "d MMMM yyyy ");
+
 const BookingItem = ({
-  property,
+  House,
+  User: tenant,
   date,
-  checkIn,
-  checkOut,
+  checkin,
+  checkout,
   invoiceImage,
   status = "cancel",
   invoiceNumber,
@@ -20,8 +24,11 @@ const BookingItem = ({
   userStatus,
   id,
   handleCloseDetailTrx,
+  total,
 }) => {
-  const isNotApprove = status !== "approve";
+  const isNotApprove = ["waiting payment", "pending", "cancel"].some(
+    (o) => o === status
+  );
   const isOwner = userStatus === "owner";
 
   return (
@@ -43,8 +50,8 @@ const BookingItem = ({
           <Grid container>
             <Grid item md={4}>
               <div>
-                <h2>{property.name}</h2>
-                <p>{property.address}</p>
+                <h2>{House?.name}</h2>
+                <p>{House?.address}</p>
               </div>
 
               <StatusPayment status={status} />
@@ -60,12 +67,12 @@ const BookingItem = ({
                     <Grid item xs={6}>
                       <span style={styles.titleSub}>Check-in</span>
                       <br />
-                      <span>{checkIn}</span>
+                      <span>{stringDate(checkin)}</span>
                     </Grid>
                     <Grid item xs={6}>
                       <span style={styles.titleSub}>Amenities</span>
                       <br />
-                      <span>{property.amenities.join(", ")}</span>
+                      <span>{House?.ameneties?.join(", ")}</span>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -77,12 +84,12 @@ const BookingItem = ({
                     <Grid item xs={6}>
                       <span style={styles.titleSub}>Check-out</span>
                       <br />
-                      <span>{checkOut}</span>
+                      <span>{stringDate(checkout)}</span>
                     </Grid>
                     <Grid item xs={6}>
                       <span style={styles.titleSub}>Type of Rent</span>
                       <br />
-                      <span>{property.typeOfRent}</span>
+                      <span>{House.typeRent}</span>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -108,15 +115,18 @@ const BookingItem = ({
           </Grid>
         </div>
 
-        <BookingCustomer status={status} />
+        <BookingCustomer
+          status={status}
+          tenants={[{ ...tenant, longTimeRent: "1 Year", total }]}
+        />
         <br />
 
         <Grid container>
           <Grid item md={8} />
           <Grid item md={4}>
             <Grid container>
-              {status === "waitingPayment" && !isOwner ? <Pay /> : null}
-              {["pending", "waitingPayment"].some((o) => o === status) &&
+              {status === "waiting payment" && !isOwner ? <Pay /> : null}
+              {["pending", "waiting payment"].some((o) => o === status) &&
               isOwner ? (
                 <ActionOwnerToTransaction
                   trxId={id}

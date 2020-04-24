@@ -13,7 +13,7 @@ import { Redirect } from "react-router-dom";
 
 import { HOME } from "../constants/routes";
 import { getOrders, loadOrders } from "../store/orders";
-import { checkIsOwner } from "../store/auth";
+import { checkIsOwner, getUser } from "../store/auth";
 import Loading from "./Loading";
 import DetailTrx from "./DetailTrx";
 
@@ -32,6 +32,7 @@ const IncomingTransaction = () => {
   const { list, loading, message } = useSelector(getOrders);
   const dispatch = useDispatch();
   const isOwner = useSelector(checkIsOwner);
+  const { role } = useSelector(getUser);
 
   useEffect(() => {
     if (isOwner) {
@@ -91,12 +92,7 @@ const IncomingTransaction = () => {
                       {statusTrx[trx?.status] || trx?.status}
                     </TableCell>
                     <TableCell>
-                      {/* <DetailTrx
-                         data={trx}
-                          userStatus={user?.status}
-                          id={trx.id}
-                         />
-                        */}
+                      <DetailTrx data={trx} userStatus={role} id={trx.id} />
                     </TableCell>
                   </TableRow>
                 ))}

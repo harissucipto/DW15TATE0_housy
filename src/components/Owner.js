@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Avatar, Menu, MenuItem } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,7 +10,7 @@ import {
 } from "@material-ui/icons";
 
 import { PROFILE, ADD_PROPERTY, MY_HISTORY, HOME } from "../constants/routes";
-import { getUser, userLogout } from "../store/auth";
+import { getUser, userLogout, getInfoUserLogin } from "../store/auth";
 
 const Owner = () => {
   const [anchorEl, setAncorEl] = useState(null);
@@ -35,6 +35,10 @@ const Owner = () => {
     dispatch(userLogout);
     history.push(HOME);
   };
+
+  useEffect(() => {
+    dispatch(getInfoUserLogin);
+  }, [dispatch]);
 
   return (
     <>

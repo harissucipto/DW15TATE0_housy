@@ -1,9 +1,8 @@
 import React from "react";
-import { useStoreActions } from "easy-peasy";
 import { Button } from "@material-ui/core";
 
 const ActionOwnerToTransaction = ({ trxId, handleCloseDetailTrx }) => {
-  const { updateTrxFromOwner } = useStoreActions(({ myBooking }) => myBooking);
+  const updateTrxFromOwner = (f) => f;
 
   const handleApprove = () => {
     const resp = updateTrxFromOwner({

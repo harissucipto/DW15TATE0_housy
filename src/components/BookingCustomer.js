@@ -16,17 +16,7 @@ const colorStatus = {
   approve: "green",
 };
 
-const customers = [
-  {
-    fullName: "Haris Sucipto",
-    gender: "Male",
-    phone: "089532693126",
-    longTimeRent: "1 Year",
-    price: 300000,
-  },
-];
-
-const BookingCustomer = ({ status }) => {
+const BookingCustomer = ({ status, tenants }) => {
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -41,12 +31,12 @@ const BookingCustomer = ({ status }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {customers.map((customer, index) => (
-            <TableRow key={index}>
+          {tenants.map((customer, index) => (
+            <TableRow key={customer.id}>
               <TableCell style={styles.content}>{index + 1}</TableCell>
-              <TableCell style={styles.content}>{customer.fullName}</TableCell>
-              <TableCell style={styles.content}>{customer.gender}</TableCell>
-              <TableCell style={styles.content}>{customer.phone}</TableCell>
+              <TableCell style={styles.content}>{customer?.fullName}</TableCell>
+              <TableCell style={styles.content}>{customer?.gender}</TableCell>
+              <TableCell style={styles.content}>{customer?.phone}</TableCell>
               <TableCell style={styles.title}>
                 <Grid container>
                   <Grid item md={6} style={styles.betweenText}>
@@ -75,7 +65,7 @@ const BookingCustomer = ({ status }) => {
                   md={6}
                   style={{ color: colorStatus[status] || "red" }}
                 >
-                  {customers.reduce((acc, value) => value.price + acc, 0)}
+                  {tenants.reduce((acc, value) => value.total + acc, 0)}
                 </Grid>
               </Grid>
             </TableCell>

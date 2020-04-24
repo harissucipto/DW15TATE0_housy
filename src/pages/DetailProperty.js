@@ -4,7 +4,6 @@ import { SingleBed, Bathtub } from "@material-ui/icons";
 
 import PropertyImage from "../components/PropertyImage";
 import HeaderDetail from "../components/HeaderDetail";
-import BookNow from "../components/BookNow";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getHouseById, getHouses, loadHouseById } from "../store/houses";
