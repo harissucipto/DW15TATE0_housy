@@ -7,10 +7,8 @@ const ChangePassword = ({ open, handleClose }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const saveValue = (setState) => (evt) => setState(evt.target.value);
-  const {
-    user: { password },
-  } = useStoreState(({ users }) => users);
-  const { onChangePassword } = useStoreActions(({ users }) => users);
+  const [password] = useState("");
+  const { onChangePassword } = (f) => f;
 
   const handleChangePassword = () => {
     if ([oldPassword, confirmPassword, newPassword].some((p) => !p)) {

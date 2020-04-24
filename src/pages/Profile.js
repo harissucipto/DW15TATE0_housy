@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, CardContent, Grid } from "@material-ui/core";
-import { useStoreState } from "easy-peasy";
+import { useSelector, useDispatch } from "react-redux";
 
 import HeaderDetail from "../components/HeaderDetail";
 import ProfileInfo from "../components/ProfileInfo";
 import ProfileImage from "../components/ProfileImage";
 import { Redirect } from "react-router-dom";
 import { HOME } from "../constants/routes";
+import { checkIsLogin, getUser, getInfoUserLogin } from "../store/auth";
 
 const Profile = () => {
-  const { user } = useStoreState(({ users }) => users);
+  const isLogin = useSelector(checkIsLogin);
+  const user = useSelector(getUser);
 
-  if (!Boolean(user)) return <Redirect to={HOME} />;
+  const dispatch = useDispatch();
+
+  // fetch daa user if login
+  useEffect(() => {
+    if (isLogin) {
+      dispatch(getInfoUserLogin);
+    }
+  }, [dispatch, isLogin]);
+
+  if (!isLogin) return <Redirect to={HOME} />;
 
   return (
     <div>
@@ -24,7 +35,7 @@ const Profile = () => {
                 <ProfileInfo {...user} />
               </Grid>
               <Grid item md={5}>
-                <ProfileImage image={user.profileImage} status={user.status} />
+                <ProfileImage image={""} status={user.status} />
               </Grid>
             </Grid>
           </CardContent>

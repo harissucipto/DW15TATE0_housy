@@ -12,9 +12,11 @@ import {
 import ChangePassword from "./ChangePassword";
 
 const _renderValueText = (text, firstUpperCase) =>
-  text.length && firstUpperCase
-    ? text.slice(0, 1).toUpperCase().concat(text.slice(1))
-    : text;
+  typeof text === "string"
+    ? text.length && firstUpperCase
+      ? text.slice(0, 1).toUpperCase().concat(text.slice(1))
+      : text
+    : "";
 
 const TextInfo = ({ title, value, Icon, onClick, firstUpperCase = true }) => (
   <>
@@ -44,7 +46,14 @@ const TextInfo = ({ title, value, Icon, onClick, firstUpperCase = true }) => (
   </>
 );
 
-const ProfileInfo = ({ fullName, email, status, gender, phone, address }) => {
+const ProfileInfo = ({
+  fullName = "",
+  email = "",
+  status = "",
+  gender = "",
+  phone = "",
+  address = "",
+}) => {
   const [openChangePassword, setOpenChangePassword] = useState(false);
   const handleCloseChangePassword = () => setOpenChangePassword(false);
   const handleOpenChangePassword = () => setOpenChangePassword(true);
