@@ -51,7 +51,7 @@ const slice = createSlice({
 
 export default slice.reducer;
 
-const {
+export const {
   ordersRequested,
   ordersReceived,
   ordersRequestFailed,
@@ -82,8 +82,23 @@ export const loadOrderById = (id) => (dispatch, getState) => {
   const { token } = getAuth(getState());
   return dispatch(
     apiCallBegan({
-      url: `order/${id}`,
+      url: `/order/${id}`,
       ...getConfigHeader(token),
+      onStart: orderRequested.type,
+      onSuccess: orderReceived.type,
+      onError: orderRequestFailed.type,
+    })
+  );
+};
+
+export const updateOrder = (id, data) => (dispatch, getState) => {
+  const { token } = getAuth(getState());
+  return dispatch(
+    apiCallBegan({
+      url: `/order/${id}`,
+      ...getConfigHeader(token),
+      method: "patch",
+      data: data,
       onStart: orderRequested.type,
       onSuccess: orderReceived.type,
       onError: orderRequestFailed.type,

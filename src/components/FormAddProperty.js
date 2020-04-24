@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { TextField, MenuItem, Checkbox, Button } from "@material-ui/core";
-import { HOME } from "../constants/routes";
 import { houseCreate, houseCreateReceived, getHouses } from "../store/houses";
 import Loading from "./Loading";
 

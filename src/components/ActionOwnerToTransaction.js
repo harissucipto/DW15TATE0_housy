@@ -1,31 +1,22 @@
 import React from "react";
 import { Button } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { updateOrder, orderReceived } from "../store/orders";
 
 const ActionOwnerToTransaction = ({ trxId, handleCloseDetailTrx }) => {
-  const updateTrxFromOwner = (f) => f;
+  const dispatch = useDispatch();
 
   const handleApprove = () => {
-    const resp = updateTrxFromOwner({
-      trxId,
-      status: "approve",
-    });
-    if (!Boolean(resp)) {
-      console.log("gagal aksi");
-      return;
+    const { type } = dispatch(updateOrder(trxId, { status: "approve" }));
+    if (type === orderReceived.type) {
+      handleCloseDetailTrx();
     }
-    handleCloseDetailTrx();
   };
   const handleCancel = () => {
-    const resp = updateTrxFromOwner({
-      trxId,
-      status: "cancel",
-    });
-
-    if (!Boolean(resp)) {
-      console.log("gagal aksi");
-      return;
+    const { type } = dispatch(updateOrder(trxId, { status: "cancel" }));
+    if (type === orderReceived.type) {
+      handleCloseDetailTrx();
     }
-    handleCloseDetailTrx();
   };
 
   return (
