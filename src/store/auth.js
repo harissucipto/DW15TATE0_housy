@@ -44,6 +44,21 @@ const slice = createSlice({
       auth.loading = false;
       auth.message = action.payload;
     },
+    userRegisterRequested: (auth) => {
+      auth.loading = true;
+      auth.message = "";
+    },
+    userRegisterReceived: (auth, action) => {
+      const { token, username, role } = action.payload;
+      auth.token = token;
+      auth.user = { username, role };
+      auth.loading = false;
+      auth.lastFetch = Date.now();
+    },
+    userRegisterRequestFailed: (auth, action) => {
+      auth.loading = false;
+      auth.message = action.payload;
+    },
   },
 });
 
@@ -57,6 +72,9 @@ export const {
   userInfoRequested,
   userInfoReceived,
   userInfoRequestFailed,
+  userRegisterRequested,
+  userRegisterReceived,
+  userRegisterRequestFailed,
 } = slice.actions;
 
 // Action Creator
@@ -90,6 +108,18 @@ export const getInfoUserLogin = (dispatch, getState) => {
     })
   );
 };
+
+export const userRegister = (user) => (dispatch) =>
+  dispatch(
+    apiCallBegan({
+      url: "/signup",
+      method: "post",
+      data: user,
+      onStart: userRegisterRequested.type,
+      onSuccess: userRegisterReceived.type,
+      onError: userRegisterRequestFailed.type,
+    })
+  );
 
 // Selector
 export const checkIsLogin = createSelector(
