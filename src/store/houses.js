@@ -2,6 +2,7 @@ import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 import { apiCallBegan } from "./api";
 import { getFilterHousesParams } from "./filterHouses";
+import { getAuth, getConfigHeader } from "./auth";
 
 const slice = createSlice({
   name: "houses",
@@ -44,18 +45,34 @@ const slice = createSlice({
       houses.loading = false;
       houses.message = action.payload;
     },
+    houseCreateRequested: (houses) => {
+      houses.loading = true;
+      houses.message = "";
+    },
+    houseCreateReceived: (houses, action) => {
+      houses.list.push(action.payload);
+      houses.loading = false;
+      houses.lastFetch = Date.now();
+    },
+    houseCreateFailed: (houses, action) => {
+      houses.loading = false;
+      houses.message = action.payload;
+    },
   },
 });
 
 export default slice.reducer;
 
-const {
+export const {
   housesRequested,
   housesReceived,
   housesRequestFailed,
   houseRequested,
   houseReceived,
   houseRequestFailed,
+  houseCreateRequested,
+  houseCreateReceived,
+  houseCreateFailed,
 } = slice.actions;
 
 const url = "/houses";
@@ -80,6 +97,21 @@ export const loadHouseById = (id) => (dispatch) => {
       onStart: houseRequested.type,
       onSuccess: houseReceived.type,
       onError: houseRequestFailed.type,
+    })
+  );
+};
+
+export const houseCreate = (house) => (dispatch, getState) => {
+  const { token } = getAuth(getState());
+  return dispatch(
+    apiCallBegan({
+      url: `/house`,
+      ...getConfigHeader(token),
+      method: "post",
+      data: house,
+      onStart: houseCreateRequested.type,
+      onSuccess: houseCreateReceived.type,
+      onError: houseCreateFailed.type,
     })
   );
 };

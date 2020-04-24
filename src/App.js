@@ -15,18 +15,13 @@ import Profile from "./pages/Profile";
 import DetailProperty from "./pages/DetailProperty";
 import MyHistory from "./pages/MyHistory";
 import MyBooking from "./pages/MyBooking";
-
-// import AddProperty from "./pages/AddProperty";
+import AddProperty from "./pages/AddProperty";
 
 function App() {
   return (
     <Router>
       <Switch>
-        {/* 
-       
-       
         <Route path={ADD_PROPERTY} component={AddProperty} />
-        */}
         <Route path={MY_BOOKING} component={MyBooking} />
         <Route path={MY_HISTORY} component={MyHistory} />
         <Route path={OWNER} component={HomeOwner} />

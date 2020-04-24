@@ -54,20 +54,21 @@ const PropertyItem = ({
             flexWrap: "wrap",
           }}
         >
-          {ameneties.map((item) => (
-            <span
-              style={{
-                backgroundColor: "white",
-                marginRight: "5px",
-                marginBottom: "5px",
-                padding: "4px 11px",
-                borderRadius: "3px",
-              }}
-              key={item}
-            >
-              {item}
-            </span>
-          ))}
+          {ameneties &&
+            ameneties.map((item) => (
+              <span
+                style={{
+                  backgroundColor: "white",
+                  marginRight: "5px",
+                  marginBottom: "5px",
+                  padding: "4px 11px",
+                  borderRadius: "3px",
+                }}
+                key={item}
+              >
+                {item}
+              </span>
+            ))}
         </div>
       </div>
       <CardContent>

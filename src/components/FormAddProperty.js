@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useStoreActions } from "easy-peasy";
+import { useDispatch, useSelector } from "react-redux";
+
 import { TextField, MenuItem, Checkbox, Button } from "@material-ui/core";
 import { HOME } from "../constants/routes";
+import { houseCreate, houseCreateReceived, getHouses } from "../store/houses";
+import Loading from "./Loading";
 
 const listAmneties = [
   {
@@ -16,6 +19,21 @@ const listAmneties = [
   {
     label: "Shared Accomodation",
     value: "Shared Accomodation",
+  },
+];
+
+const listCities = [
+  {
+    value: 1,
+    label: "Jakarta",
+  },
+  {
+    value: 2,
+    label: "Pekanbaru",
+  },
+  {
+    value: 3,
+    label: "Tanjung Balai Karimun",
   },
 ];
 
@@ -45,35 +63,54 @@ const FormAddProperty = () => {
     Object.values(obj).every((item) => Boolean(item));
 
   const history = useHistory();
-  const { onLogout } = useStoreActions(({ users }) => users);
-  const { createProperty } = useStoreActions(({ properties }) => properties);
+  const dispatch = useDispatch();
 
-  const handleSubmit = () => {
+  const checkCanSubmit = () => {
     const data = {
       name,
-      city,
+      cityId: city,
       address,
       price: Number(price),
-      typeOfRent,
-      amenities: Object.keys(amenities).filter((item) => amenities[item]),
-      baths,
-      bedrooms,
+      typeRent: typeOfRent,
+      ameneties: Object.keys(amenities).filter((item) => amenities[item]),
+      bathroom: baths,
+      bedRoom: bedrooms,
     };
-    if (!isEveryValueFil(data)) {
-      console.log("data belum lengkap");
-      return;
+    if (isEveryValueFil(data)) {
+      return true;
     }
 
-    const resp = createProperty(data);
-    if (resp) {
-      onLogout();
-      history.push(HOME);
+    return false;
+  };
+
+  const isCanSubmit = checkCanSubmit();
+
+  const handleSubmit = async () => {
+    const data = {
+      name,
+      cityId: city,
+      address,
+      price: Number(price),
+      typeRent: typeOfRent,
+      ameneties: Object.keys(amenities).filter((item) => amenities[item]),
+      bathroom: baths,
+      bedRoom: bedrooms,
+    };
+    const { type, payload } = await dispatch(houseCreate(data));
+    if (type === houseCreateReceived.type) {
+      const { id } = payload;
+      history.push(`/detail-property/${id}`);
     }
   };
+
+  const { loading, message } = useSelector(getHouses);
+
+  if (loading) return <Loading />;
 
   return (
     <div>
       <h1>Add Property</h1>
+      <p>{message}</p>
       <div style={{ margin: "2rem 2rem" }}>
         <div>
           <h2>Name Property</h2>
@@ -91,9 +128,9 @@ const FormAddProperty = () => {
             value={city}
             onChange={saveValue(setCity)}
           >
-            {new Array(10).fill({}).map((_, index) => (
-              <MenuItem value={index} key={index}>
-                Kota {index + 1}
+            {listCities.map((city, index) => (
+              <MenuItem value={city.value} key={city.value}>
+                {city.label}
               </MenuItem>
             ))}
           </TextField>
@@ -158,7 +195,7 @@ const FormAddProperty = () => {
             value={bedrooms}
             onChange={saveValue(setBedrooms)}
           >
-            {new Array(10).fill({}).map((_, index) => (
+            {new Array(5).fill({}).map((_, index) => (
               <MenuItem value={index + 1} key={index}>
                 {index + 1}
               </MenuItem>
@@ -172,7 +209,7 @@ const FormAddProperty = () => {
             value={baths}
             onChange={saveValue(setBaths)}
           >
-            {new Array(10).fill({}).map((_, index) => (
+            {new Array(5).fill({}).map((_, index) => (
               <MenuItem value={index + 1} key={index}>
                 {index + 1}
               </MenuItem>
@@ -191,6 +228,7 @@ const FormAddProperty = () => {
         }}
       >
         <Button
+          disabled={!isCanSubmit}
           variant="contained"
           color="primary"
           fullWidth
