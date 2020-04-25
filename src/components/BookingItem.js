@@ -125,7 +125,9 @@ const BookingItem = ({
           <Grid item md={8} />
           <Grid item md={4}>
             <Grid container>
-              {status === "waiting payment" && !isOwner ? <Pay /> : null}
+              {status === "waiting payment" && !isOwner ? (
+                <Pay id={id} />
+              ) : null}
               {["pending", "waiting payment"].some((o) => o === status) &&
               isOwner ? (
                 <ActionOwnerToTransaction

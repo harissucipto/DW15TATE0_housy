@@ -7,8 +7,9 @@ import { MY_BOOKING } from "../constants/routes";
 import { useSelector, useDispatch } from "react-redux";
 import { checkIsLogin, getUser } from "../store/auth";
 import { signinOpen } from "../store/signin";
+import { addOrder, orderAddReceived } from "../store/orders";
 
-const BookNow = ({ propertyID }) => {
+const BookNow = ({ id, typeRent }) => {
   const [open, setOpen] = useState(false);
 
   const isLogin = useSelector(checkIsLogin);
@@ -33,27 +34,20 @@ const BookNow = ({ propertyID }) => {
   };
 
   const history = useHistory();
-  const addOrder = (f) => f;
-  const handleBooking = () => {
+  const handleBooking = async () => {
     const data = {
-      propertyID,
-      checkIn: checkIn,
-      checkOut: checkOut,
-      date: formatDate(new Date()),
-      longTimeRent: "1 Year",
-      status: "waitingPayment",
+      checkin: format(new Date(checkIn), "MM-dd-yyyy"),
+      checkout: format(new Date(checkOut), "MM-dd-yyyy"),
+      longTimeRent: `1 ${typeRent}`,
+      status: "waiting payment",
+      houseId: id,
     };
-
-    const respOrder = addOrder(data);
-    if (respOrder) {
-      console.log("berhasil");
+    const { type } = await dispatch(addOrder(data));
+    if (type === orderAddReceived.type) {
       handleClose();
       history.push(MY_BOOKING);
-
       return;
     }
-
-    console.log("gagal");
   };
 
   if (user && user.role !== "tenant") return null;

@@ -84,7 +84,7 @@ const DetailProperty = () => {
               <p>{description}</p>
             </div>
             <div style={styles.action}>
-              <BookNow propertyID={id} />
+              <BookNow id={house.id} typeRent={house.typeRent} />
             </div>
           </div>
         </div>

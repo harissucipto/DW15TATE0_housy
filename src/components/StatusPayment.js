@@ -3,16 +3,16 @@ import { Button } from "@material-ui/core";
 
 const textStatus = {
   cancel: "cancel",
-  pending: "Waiting Approve",
+  pending: "Pending",
   approve: "Approve",
-  waitingPayment: "Wating Payment",
+  "waiting payment": "Wating Payment",
 };
 
 const colorStatus = {
   cancel: "red",
   pending: "#F7941E",
   approve: "green",
-  waitingPayment: "red",
+  "waiting payment": "red",
 };
 
 const StatusPayment = ({ status = "notYet" }) => {

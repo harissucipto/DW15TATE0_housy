@@ -1,10 +1,26 @@
 import React, { useState } from "react";
 import { Button, Dialog, DialogContent } from "@material-ui/core";
 
-const Pay = () => {
+import { useDispatch } from "react-redux";
+import { updateOrder, orderReceived } from "../store/orders";
+
+const Pay = ({ id }) => {
+  const dispatch = useDispatch();
+  const handlePay = async () => {
+    const { type } = await dispatch(updateOrder(id, { status: "pending" }));
+    if (type === orderReceived.type) {
+      console.log("berhasil");
+    }
+  };
+
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+    handlePay();
+  };
 
   return (
     <>

@@ -46,6 +46,18 @@ const slice = createSlice({
       orders.loading = false;
       orders.message = action.payload;
     },
+    orderAddRequested: (orders) => {
+      orders.loading = true;
+      orders.message = "";
+    },
+    orderAddReceived: (orders, action) => {
+      orders.list.push(action.payload);
+      orders.loading = false;
+    },
+    orderAddRequestFailed: (orders, action) => {
+      orders.loading = false;
+      orders.message = action.payload;
+    },
   },
 });
 
@@ -58,6 +70,9 @@ export const {
   orderRequested,
   orderReceived,
   orderRequestFailed,
+  orderAddRequested,
+  orderAddReceived,
+  orderAddRequestFailed,
 } = slice.actions;
 
 const url = "/orders";
@@ -102,6 +117,21 @@ export const updateOrder = (id, data) => (dispatch, getState) => {
       onStart: orderRequested.type,
       onSuccess: orderReceived.type,
       onError: orderRequestFailed.type,
+    })
+  );
+};
+
+export const addOrder = (data) => (dispatch, getState) => {
+  const { token } = getAuth(getState());
+  return dispatch(
+    apiCallBegan({
+      url: `/order`,
+      ...getConfigHeader(token),
+      method: "post",
+      data: data,
+      onStart: orderAddRequested.type,
+      onSuccess: orderAddReceived.type,
+      onError: orderAddRequestFailed.type,
     })
   );
 };

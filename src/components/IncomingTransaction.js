@@ -20,7 +20,7 @@ import DetailTrx from "./DetailTrx";
 const colorStatus = {
   approve: "green",
   cancel: "red",
-  waitingPayment: "red",
+  "waiting payment": "red",
   pending: "#F7941E",
 };
 

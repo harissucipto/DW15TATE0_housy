@@ -6,37 +6,6 @@ import PropertyItem from "./PropertyItem";
 import { getHouses, loadHouses } from "../store/houses";
 import Loading from "./Loading";
 
-// const filterProperties = (
-//   data,
-//   { searchLocation = "", typeOfRent, bedrooms, baths, amenities, budget }
-// ) => {
-//   return data.filter((data) => {
-//     const isLocation = data.address
-//       .toLowerCase()
-//       .includes(searchLocation.toLowerCase());
-//     const isTypeOfRent = !Boolean(typeOfRent)
-//       ? true
-//       : data.typeOfRent === typeOfRent;
-//     const isBedroom = !Boolean(bedrooms) ? true : data.bedrooms === bedrooms;
-//     const isBath = !Boolean(baths) ? true : data.baths === baths;
-//     const isAmenities = Object.values(amenities).every((value) => !value)
-//       ? true
-//       : Object.keys(amenities)
-//           .filter((item) => amenities[item])
-//           .every((item) => data.amenities.includes(item));
-
-//     const isBudget = !Boolean(budget) ? true : data.price <= Number(budget);
-//     return (
-//       isLocation &&
-//       isTypeOfRent &&
-//       isBedroom &&
-//       isBath &&
-//       isAmenities &&
-//       isBudget
-//     );
-//   });
-// };
-
 const PropertyList = () => {
   const { list, loading, message } = useSelector(getHouses);
   const dispatch = useDispatch();
