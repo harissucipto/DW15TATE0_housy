@@ -45,6 +45,7 @@ const Signin = () => {
   };
 
   const handleOpenSignupModal = () => {
+    dispatch(clearMessage);
     dispatch(signinClose);
     dispatch(signupOpen);
   };

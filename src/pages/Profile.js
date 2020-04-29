@@ -40,7 +40,7 @@ const Profile = () => {
         <div style={styles.container}>
           <Card variant="outlined" style={styles.profile}>
             <CardContent>
-              <Grid container>
+              <Grid container spacing={10}>
                 <Grid item md={7}>
                   <ProfileInfo {...user} />
                 </Grid>
