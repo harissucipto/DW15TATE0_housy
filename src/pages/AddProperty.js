@@ -12,17 +12,13 @@ const AddProperty = () => {
   if (!isOwner) return <Redirect to={HOME} />;
 
   return (
-    <div>
+    <div className="rumah">
       <HeaderDetail />
-      <div style={styles.container}>
+      <div className="sub-rumah">
         <FormAddProperty />
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: { marginLeft: "4rem", marginBottom: "5rem" },
 };
 
 export default AddProperty;

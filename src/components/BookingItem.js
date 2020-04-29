@@ -35,7 +35,7 @@ const BookingItem = ({
     <Card variant="outlined" style={styles.container}>
       <CardContent>
         <div style={styles.containerContent}>
-          <Grid container>
+          <Grid container spacing={4}>
             <Grid item md={9} style={styles.containerLogo}>
               <img src={Logo} width={138} alt="logo" />
             </Grid>
@@ -47,7 +47,7 @@ const BookingItem = ({
             </Grid>
           </Grid>
 
-          <Grid container>
+          <Grid container spacing={4}>
             <Grid item md={4}>
               <div>
                 <h2>{House?.name}</h2>
@@ -97,7 +97,7 @@ const BookingItem = ({
             </Grid>
 
             <Grid item md={3}>
-              <Grid container>
+              <Grid container spacing={4}>
                 <Grid item xs={12} style={styles.buktiPembayaran}>
                   <div
                     style={{

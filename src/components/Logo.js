@@ -1,14 +1,16 @@
 import React from "react";
 
 import logoImage from "../images/logo.PNG";
+import "../index.css";
 
 const Logo = ({ onClick = (f) => f }) => {
   return (
     <div
       onClick={onClick}
       style={{
-        width: "460px",
+        width: "100%",
       }}
+      className="logo-rumah"
     >
       <img
         src={logoImage}

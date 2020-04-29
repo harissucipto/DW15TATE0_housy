@@ -11,7 +11,12 @@ import { useHistory } from "react-router-dom";
 
 import { HOME, OWNER } from "../constants/routes";
 import { getSignupIsOpen, signupOpen, signupClose } from "../store/signup";
-import { userRegister, userRegisterReceived, getAuth } from "../store/auth";
+import {
+  userRegister,
+  userRegisterReceived,
+  getAuth,
+  clearMessage,
+} from "../store/auth";
 import Loading from "./Loading";
 
 const genders = [
@@ -40,6 +45,7 @@ const Signup = () => {
   const open = useSelector(getSignupIsOpen);
   const dispatch = useDispatch();
   const handleOpen = () => {
+    dispatch(clearMessage);
     dispatch(signupOpen);
   };
   const handleClose = () => dispatch(signupClose);

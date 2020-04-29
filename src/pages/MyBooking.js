@@ -12,20 +12,13 @@ const MyBooking = () => {
   if (!isLogin) return <Redirect to={HOME} />;
 
   return (
-    <div>
+    <div className="rumah">
       <HeaderDetail />
-      <div style={styles.container}>
+      <div clasName="sub-rumah">
         <BookingList />
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    maxWidth: "1035px",
-    margin: "0 auto",
-  },
 };
 
 export default MyBooking;

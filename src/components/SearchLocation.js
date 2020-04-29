@@ -18,7 +18,7 @@ const SearchLocation = () => {
   };
 
   return (
-    <div style={{ width: "400px", height: "50px", boxSizing: "border-box" }}>
+    <div style={{ width: "100%", height: "50px", boxSizing: "border-box" }}>
       <TextField
         disabled
         variant="filled"

@@ -35,7 +35,11 @@ const api = ({ dispatch }) => (next) => async (action) => {
     // General
     dispatch(actions.apiCallFailed(error.message));
     // Specific
-    if (onError) return dispatch({ type: onError, payload: error.message });
+    const message =
+      error.message === "Request failed with status code 401"
+        ? "Data yang anda masukan tidak valid"
+        : "Internal Server Error, Silahkan Coba lagi!";
+    if (onError) return dispatch({ type: onError, payload: message });
   }
 };
 

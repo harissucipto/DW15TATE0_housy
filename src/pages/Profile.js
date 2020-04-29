@@ -32,7 +32,7 @@ const Profile = () => {
   if (!isLogin) return <Redirect to={HOME} />;
 
   return (
-    <div>
+    <div className="rumah">
       <HeaderDetail />
       {loading ? (
         <Loading />

@@ -32,7 +32,7 @@ const Filter = () => {
   };
 
   return (
-    <div style={{ width: "460px", paddingTop: "40px", paddingLeft: "50px" }}>
+    <div style={{ width: "100%" }}>
       <TypeOfRent
         selected={filter.typeRent}
         onSelected={handleChangeFilter("typeRent")}

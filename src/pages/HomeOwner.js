@@ -12,19 +12,13 @@ const HomeOwner = () => {
   if (!isOwner) return <Redirect to={HOME} />;
 
   return (
-    <div>
+    <div className="rumah">
       <HeaderDetail />
-      <div style={styles.container}>
+      <div className="sub-rumah">
         <IncomingTransaction />
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    margin: "2rem 8.7rem ",
-  },
 };
 
 export default HomeOwner;

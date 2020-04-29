@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 
 const listBedroom = [
   {
@@ -72,34 +72,39 @@ const PropertyRoom = ({
       <h3>Property Room</h3>
       <div>
         <p>Bedroom</p>
-        {listBedroom.map(({ label, value }) => (
-          <Button
-            disabled
-            key={value}
-            variant="contained"
-            style={{ marginRight: "25px" }}
-            onClick={handleChangeBedroom(value)}
-            color={value === bedroomSelected ? "primary" : "default"}
-          >
-            {label}
-          </Button>
-        ))}
+        <Grid container spacing={4}>
+          {listBedroom.map(({ label, value }) => (
+            <Grid item key={value}>
+              <Button
+                disabled
+                key={value}
+                variant="contained"
+                onClick={handleChangeBedroom(value)}
+                color={value === bedroomSelected ? "primary" : "default"}
+              >
+                {label}
+              </Button>
+            </Grid>
+          ))}
+        </Grid>
       </div>
 
       <div>
         <p>Bathroom</p>
-        {listBathroom.map(({ label, value }) => (
-          <Button
-            disabled
-            key={value}
-            variant="contained"
-            onClick={handleChangeBaths(value)}
-            style={{ marginRight: "25px" }}
-            color={value === bathroomSelected ? "primary" : "default"}
-          >
-            {label}
-          </Button>
-        ))}
+        <Grid container spacing={4}>
+          {listBathroom.map(({ label, value }) => (
+            <Grid item key={value}>
+              <Button
+                disabled
+                variant="contained"
+                onClick={handleChangeBaths(value)}
+                color={value === bathroomSelected ? "primary" : "default"}
+              >
+                {label}
+              </Button>
+            </Grid>
+          ))}
+        </Grid>
       </div>
     </div>
   );

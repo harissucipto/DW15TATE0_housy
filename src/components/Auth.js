@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Grid } from "@material-ui/core";
 
 import { checkIsLogin, checkIsTenant } from "../store/auth";
 import Signin from "./Signin";
@@ -12,20 +13,28 @@ const Auth = () => {
   const isTenant = useSelector(checkIsTenant);
 
   return (
-    <div>
+    <Grid container justify="flex-end" spacing={2}>
       {isLogin ? (
         isTenant ? (
-          <User />
+          <Grid item>
+            <User />
+          </Grid>
         ) : (
-          <Owner />
+          <Grid item>
+            <Owner />
+          </Grid>
         )
       ) : (
         <>
-          <Signin />
-          <Signup />
+          <Grid item>
+            <Signin />
+          </Grid>
+          <Grid item>
+            <Signup />
+          </Grid>
         </>
       )}
-    </div>
+    </Grid>
   );
 };
 

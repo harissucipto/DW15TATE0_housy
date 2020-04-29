@@ -19,36 +19,18 @@ const PropertyList = () => {
   if (message) return <h3>{message}</h3>;
 
   return (
-    <div
-      style={{
-        flex: 1,
-        marginLeft: "50px",
-        marginTop: "26px",
-      }}
-    >
-      <Grid container>
-        {list.map((property) => (
-          <Grid
-            item
-            md={6}
-            xs={12}
-            lg={4}
-            key={property.id}
-            style={{
-              paddingRight: "27px",
-              paddingBottom: "35px",
-            }}
-          >
-            <PropertyItem {...property} />
-          </Grid>
-        ))}
-        {list.length === 0 && (
-          <div>
-            <h3 style={{ textAlign: "center" }}>Tidak Ada Data</h3>
-          </div>
-        )}
-      </Grid>
-    </div>
+    <Grid container spacing={4} style={{ marginTop: "20px" }}>
+      {list.map((property) => (
+        <Grid item md={6} xs={12} lg={4} key={property.id}>
+          <PropertyItem {...property} />
+        </Grid>
+      ))}
+      {list.length === 0 && (
+        <div>
+          <h3 style={{ textAlign: "center" }}>Tidak Ada Data</h3>
+        </div>
+      )}
+    </Grid>
   );
 };
 

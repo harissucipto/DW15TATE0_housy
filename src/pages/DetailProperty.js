@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Grid, CircularProgress } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { SingleBed, Bathtub } from "@material-ui/icons";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,11 +8,12 @@ import { getHouseById, getHouses, loadHouseById } from "../store/houses";
 import PropertyImage from "../components/PropertyImage";
 import HeaderDetail from "../components/HeaderDetail";
 import BookNow from "../components/BookNow";
+import Loading from "../components/Loading";
 
 const DetailProperty = () => {
   const { id } = useParams();
   const house = useSelector(getHouseById(id));
-  const { loading } = useSelector(getHouses);
+  const { loading, message } = useSelector(getHouses);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,25 +21,14 @@ const DetailProperty = () => {
   }, [dispatch, id]);
 
   return (
-    <div>
+    <div className="rumah">
       <HeaderDetail />
-      {loading && (
-        <div
-          style={{
-            display: "flex",
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            height: "50vh",
-          }}
-        >
-          <CircularProgress />
-        </div>
-      )}
+      {loading && <Loading />}
       {!loading && !house && <h3>Tidak Ada Rumah</h3>}
+      {message && <h3>{message}</h3>}
 
       {!loading && house && (
-        <div style={styles.container}>
+        <div className="sub-rumah">
           <PropertyImage images={new Array(7).fill("")} />
           <div style={styles.containerDetail}>
             <h1>{house.name}</h1>
@@ -94,10 +84,6 @@ const DetailProperty = () => {
 };
 
 const styles = {
-  container: {
-    maxWidth: "1018px",
-    margin: "0 auto",
-  },
   containerDetail: {
     margin: "2em",
   },
