@@ -19,8 +19,8 @@ const api = ({ dispatch }) => (next) => async (action) => {
   next(action);
 
   try {
-    const { data: response } = await axios.request({
-      baseURL: "http://localhost:5000/api/v1/",
+    const { data: res    const { data: response } = await axios.request({
+      baseURL: "https://housh-haris-api.herokuapp.com/api/v1",
       url,
       method,
       data,
@@ -40,7 +40,3 @@ const api = ({ dispatch }) => (next) => async (action) => {
         ? "Data yang anda masukan tidak valid"
         : "Internal Server Error, Silahkan Coba lagi!";
     if (onError) return dispatch({ type: onError, payload: message });
-  }
-};
-
-export default api;
