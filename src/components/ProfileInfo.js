@@ -16,12 +16,12 @@ const _renderValueText = (text, firstUpperCase) =>
     ? text.length && firstUpperCase
       ? text.slice(0, 1).toUpperCase().concat(text.slice(1))
       : text
-    : "";
+    : "----";
 
 const TextInfo = ({ title, value, Icon, onClick, firstUpperCase = true }) => (
   <>
     <Grid item xs={12}>
-      <Grid container>
+      <Grid container spacing={2}>
         <Grid style={styles.iconContainer} item xs={2}>
           <Icon style={styles.icon} />
         </Grid>
