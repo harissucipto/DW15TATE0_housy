@@ -33,7 +33,7 @@ const DetailProperty = () => {
           <div style={styles.containerDetail}>
             <h1>{house.name}</h1>
             <Grid container>
-              <Grid item md={8}>
+              <Grid item xs={12} sm={8} md={8}>
                 <h2>
                   Rp.{" "}
                   {new Intl.NumberFormat("id-ID", {
@@ -43,23 +43,23 @@ const DetailProperty = () => {
                 </h2>
                 <p>{house.address}</p>
               </Grid>
-              <Grid item md={4}>
-                <Grid container>
-                  <Grid item xs={4}>
+              <Grid item xs={12} sm={4} md={4}>
+                <Grid container spacing={2}>
+                  <Grid item>
                     <p>Bedrooms</p>
                     <div style={styles.feature}>
                       <b style={styles.textFeature}>{house.bedRoom}</b>{" "}
                       <SingleBed />
                     </div>
                   </Grid>
-                  <Grid item xs={4}>
+                  <Grid item>
                     <p>Bathrooms</p>{" "}
                     <div style={styles.feature}>
                       <b style={styles.textFeature}>{house.bathroom}</b>
                       <Bathtub />
                     </div>
                   </Grid>
-                  <Grid item xs={4}>
+                  <Grid item>
                     <p>Area</p>{" "}
                     <div>
                       <b style={styles.textFeature}>{house.area} </b>
